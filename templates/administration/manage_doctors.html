@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>manage doctors</title>
+</head>
+<style>
+    table,th,td {
+        border: 1px solid black;
+    }
+    h1{
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>ADD & MANAGE DOCTORS</h1>
+    <table style="width: 100%;">
+        <tr>
+            <th>SI NO</th>
+            <th>NAME</th>
+            <th>PHONE</th>
+            <th>EMAIL</th>
+            <th>AGE</th>
+            <th>GENDER</th>
+            <th>QUALIFICATION</th>
+            <th>EXPERIENCE</th>
+            <th>DEPARTMENT</th>
+            <th><a href="/add_doc">+</a></th>
+        </tr>
+        {% for i in doctors %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.Name }}</td>
+            <td>{{ i.Phoneno }}</td>
+            <td>{{ i.Email }}</td>
+            <td>{{ i.Age }}</td>
+            <td>{{ i.Gender }}</td>
+            <td>{{ i.Qualification }}</td>
+            <td>{{ i.Experience }}</td>
+            <td>{{ i.Department }}</td>
+            <td><button>EDIT</button><br></br>
+            <button><a href="/update_doc">UPDATE</a></button></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background: #f4f6f9;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #2c3e50;
+      color: #fff;
+      padding-top: 20px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 22px;
+      color: #ecf0f1;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #bdc3c7;
+      padding: 15px 20px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: #34495e;
+      color: #fff;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 250px;
+      width: calc(100% - 250px);
+    }
+
+    /* Top Navbar */
+    .navbar {
+      background: #fff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar h1 {
+      font-size: 20px;
+      color: #2c3e50;
+    }
+
+    .navbar .profile {
+      font-size: 16px;
+      color: #2c3e50;
+      cursor: pointer;
+    }
+
+    /* Dashboard Content */
+    .dashboard {
+      padding: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #7f8c8d;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="#">Dashboard</a>
+    <a href="/manage_doctors">Doctors</a>
+    <a href="/view_patients">Patients</a>
+    <a href="/verify_pharmacist">Pharmacists</a>
+    <a href="/govt_policy">Government Policies</a>
+    <a href="/view_review">Reviews</a>
+    <a href="/logout">Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Navbar -->
+    <div class="navbar">
+      <h1>Admin Home</h1>
+      <div class="profile">Welcome, Admin</div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+      <div class="cards">
+        <div class="card">
+          <h3>Total Doctors</h3>
+        
+        </div>
+        <div class="card">
+          <h3>Total Patients</h3>
+        
+        </div>
+        <div class="card">
+          <h3>Pharmacists</h3>
+          
+        </div>
+        <div class="card">
+          <h3>Policies</h3>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+</body>
+</html>

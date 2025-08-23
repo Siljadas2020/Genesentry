@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add doctors</title>
+    <style>
+       body{ display: flex;
+             justify-content: center;  
+             height: 100vh;
+             align-items:center ;
+       }
+    </style>
+</head>
+<body> 
+
+    <form method="post">
+        {% csrf_token %}
+        <h1>ADD DOCTORS</h1>
+        <label>NAME:</label><input type="text" name="Name"><br><br>
+        <label>PHONE:</label><input type="text" name="Phoneno"><br><br>    
+        <label>EMAIL:</label><input type="text" name="Email"><br><br>
+        <label>AGE:</label><input type="text" name="Age"><br><br>
+        <label>GENDER:</label><input type="text" name="Gender"><br><br>
+        <label>DEPARTMENT:</label><input type="text" name="Department"><br><br>
+        <label>EXPERIENCE:</label><input type="text" name="Experience"><br><br>
+        <label>QUALIFICATION:</label><input type="text" name="Qualification"><br><br>
+        <label>PASSWORD:</label><input type="password" name="Password"><br><br>
+        <button>ADD</button>
+    </form>
+</body>
+</html>
