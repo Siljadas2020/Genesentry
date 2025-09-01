@@ -13,17 +13,18 @@
     </style>
 </head>
 <body>
-    <form action="">
+    <form action="" method="post">
+        {% csrf_token %}
         <h1>UPDATE DOCTORS</h1>
 
-        <label>NAME:</label><input type="text"><br><br>
-        <label>PHONE:</label><input type="text"><br><br>
-        <label>EMAIL:</label><input type="text"><br><br>
-        <label>AGE:</label><input type="text"><br><br>
-        <label>GENDER:</label><input type="text"><br><br>
-        <label>DEPARTMENT:</label><input type="text"><br><br>
-        <label>EXPERIENCE:</label><input type="text"><br><br>
-        <label>QUALIFICATION:</label><input type="text"><br><br>
+        <label>NAME:</label><input type="text" name="Name" value="{{doctor.Name}}"><br><br>
+        <label>PHONE:</label><input type="text" name="Phoneno" value="{{doctor.Phoneno}}"><br><br>
+        <label>EMAIL:</label><input type="text" name="Email" value="{{doctor.Email}}"><br><br>
+        <label>AGE:</label><input type="text" name="Age" value="{{doctor.Age}}"><br><br>
+        <label>GENDER:</label><input type="text" name="Gender" value="{{doctor.Gender}}"><br><br>
+        <label>DEPARTMENT:</label><input type="text" name="Department" value="{{doctor.Department}}"><br><br>
+        <label>EXPERIENCE:</label><input type="text" name="Experience" value="{{doctor.Experience}}"><br><br>
+        <label>QUALIFICATION:</label><input type="text" name="Qualification" value="{{doctor.Qualification}}"><br><br>
         <button>UPDATE</button>
     </form>
 </body>

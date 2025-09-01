@@ -8,30 +8,35 @@
 <style>
     table,th,td {
         border: 1px solid black;
+        text-align: center;
     }
     h1 {
             text-align: center;
     }
 </style>
 <body>
-    <h1>VIEW PATIENTS</h1>.
+    <h1>VIEW PATIENTS</h1>
     <table style="width: 100%;">
         <tr>
             <th>SI NO</th>
             <th>NAME</th>
-            <th>PHONE</th>
-            <th>EMAIL</th>
             <th>AGE</th>
+            <th>DOB</th>
             <th>GENDER</th>
+            <th>EMAIL</th>
+            <th>PHONE</th>
         </tr>
+{% for i in patients %}
         <tr>
-            <td>1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+             <td>{{ forloop.counter }}</td>
+            <td>{{ i.Name }}</td>
+            <td>{{i.Age}}</td>
+             <td>{{i.Dob}}</td>
+             <td>{{i.Gender}}</td>
+             <td>{{i.Email}}</td>
+            <td>{{i.Phoneno}}</td>
         </tr>
+        {% endfor %}
     </table>
 </body>
 </html>

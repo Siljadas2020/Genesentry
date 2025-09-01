@@ -14,22 +14,23 @@
            justify-content: center;
            height: 100vh;
            align-items: center;
-           background-color:wheat
+           background-color:wheat;
         }  
     </style>
 </head>
 <body>
-    <form>
+    <form action="" method="POST">
+     {% csrf_token %}
+
         <h1>Register</h1>
-    <label>Full name:<input type="text"></label><br>
-    <label>Email:<input type="email"></label><br>
-    <label>Phone number:<input type="text"></label><br>
-    <label>Qualification:<input type="text"></label><br>
-    <label>Age:<input type="text"></label><br>
-    <label>Gender:Female<input type="radio">&nbsp;Male<input type="radio">&nbsp;Other<input type="radio">&nbsp;</label><br>
-    <label>Password:<input type="password"></label><br>
-    <label>Confirm password:<input type="password"></label><br>
-    <button type="button">Register</button>&nbsp;&nbsp;
+    <label>Full name:<input type="text" name="Name"></label><br>
+    <label>Email:<input type="email" name="Email"></label><br>
+    <label>Phone number:<input type="text" name="Phoneno"></label><br>
+    <label>Qualification:<input type="text" name="Qualification"></label><br>
+    <label>Age:<input type="text" name="Age"></label><br>
+    <label>Gender:<input type="radio" name="Gender" value="Female">Female&nbsp;<input type="radio" name="Gender" value="Male">Male&nbsp;<input type="radio" name="Gender" value="Other">Other&nbsp;</label><br>
+    <label>Password:<input type="password" name="Password"></label><br>
+    <button type="submit">Register</button>&nbsp;
     <button type="button">Login</button>
 </form>
 </body>

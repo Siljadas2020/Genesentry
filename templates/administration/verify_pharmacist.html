@@ -27,17 +27,20 @@
             <th>QUALIFICATION</th>
             <th>ACTIONS</th>
         </tr>
+        {% for i in pharmacist %}
         <tr>
-            <td>1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.Name }}</td>
+            <td>{{ i.Phoneno }}</td>
+            <td>{{ i.Email }}</td>
+            <td>{{ i.Age }}</td>
+            <td>{{ i.Gender }}</td>
+            <td>{{ i.Qualification }}</td>
             <td><button>ACCEPT</button><br></br>
             <button>REJECT</button></td>
         </tr>
+        {% endfor %}
     </table>
 </body>
 </html>

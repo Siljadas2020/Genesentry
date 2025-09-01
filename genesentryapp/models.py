@@ -35,6 +35,7 @@ class PharmacistTable(models.Model):
     Phoneno=models.CharField(max_length=15,null=True,blank=True)
     Qualification=models.CharField(max_length=100,null=True,blank=True)
 
+
 class MedicineTable(models.Model):
     PharmacyId = models.ForeignKey(PharmacistTable,on_delete=models.CASCADE,null=True,blank=True)
     Name=models.CharField(max_length=100,null=True,blank=True)

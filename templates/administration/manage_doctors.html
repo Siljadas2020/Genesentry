@@ -39,8 +39,9 @@
             <td>{{ i.Qualification }}</td>
             <td>{{ i.Experience }}</td>
             <td>{{ i.Department }}</td>
-            <td><button>EDIT</button><br></br>
-            <button><a href="/update_doc">UPDATE</a></button></td>
+            <td>
+            <button><a href="/update_doc/{{ i.id }}/">UPDATE</a></button><br></br><button><a href="/delete_doc/{{i.Loginid.id}}/">DELETE</button><br></br></td>
+
         </tr>
         {% endfor %}
     </table>

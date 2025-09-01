@@ -51,12 +51,32 @@ class ManageDoctorsView(View):
         return render(request, 'administration/manage_doctors.html',{'doctors':c})
 
 class UpdateDocView(View):
-    def get(self, request):
-        return render(request, 'administration/update_doc.html')
+    def get(self, request,id):
+        c=DoctorTable.objects.get(id=id)
+        return render(request, 'administration/update_doc.html',{'doctor':c})
+    def post(self, request, id):
+        c=DoctorTable.objects.get(id=id)
+        form=DoctorForm(request.POST, instance=c)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('''<script>alert('Doctor updated succesfully!');window.location='/manage_doctors'</script>''')
+        return render(request, 'administration/update_doc.html',{'doctor':c,'form':form})
+
+class DeleteDocView(View):
+    def get(self,request,id):
+        c=LoginTable.objects.get(id=id)
+        c.delete()
+        return HttpResponse('''<script>alert('Doctor deleted succesfully!');window.location='/manage_doctors'</script>''')
+    
+       
+        
+    
 
 class VerifyPharmacistView(View):
     def get(self, request):
-        return render(request, 'administration/verify_pharmacist.html')
+        c=PharmacistTable.objects.all()
+        return render(request, 'administration/verify_pharmacist.html',{'pharmacist':c})
+    
 
 class ViewAppointmentsView(View):
     def get(self, request):
@@ -64,7 +84,8 @@ class ViewAppointmentsView(View):
 
 class ViewPatientsView(View):
     def get(self, request):
-        return render(request, 'administration/view_patients.html')
+        c=UserTable.objects.all()
+        return render(request, 'administration/view_patients.html',{'patients':c})
 
 class ViewReviewView(View):
     def get(self, request):
@@ -95,6 +116,7 @@ class PrescriptionView(View):
     
 class AddView(View):
     def get(self, request):
+    
         return render(request, 'Pharmacy/add.html')
     
 class EditView(View):
@@ -108,6 +130,17 @@ class ManageMedicineView(View):
 class RegisterView(View):
     def get(self, request):
         return render(request, 'Pharmacy/register.html')
+    def post(self,request):
+        c=PharmacistForm(request.POST)
+        if c.is_valid():
+            reg=c.save(commit=False)
+            reg.Loginid=LoginTable.objects.create(Username=reg.Email,Passsword=request.POST['Password'],Userrole='Pharmacist')
+            reg.save()
+            return HttpResponse('''<script>alert('Pharmacist added succesfully!');window.location='/verify_pharmacist'</script>''')
+
+
+
+
     
 class RequestView(View):
     def get(self, request):
