@@ -37,8 +37,8 @@
             <td>{{ i.Age }}</td>
             <td>{{ i.Gender }}</td>
             <td>{{ i.Qualification }}</td>
-            <td><button>ACCEPT</button><br></br>
-            <button>REJECT</button></td>
+            <td><button onclick="window.location='/AcceptPharmacist/{{ i.id }}'">ACCEPT</button><br></br>
+            <button onclick="window.location='/RejectPharmacist/{{ i.id }}'">REJECT</button></td>
         </tr>
         {% endfor %}
     </table>

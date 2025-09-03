@@ -44,6 +44,24 @@ class AddDoctorView(View):
 class GovtPolicyView(View):
     def get(self, request):
         return render(request, 'administration/govt_policy.html')
+    def post(self, request):
+        c=GovtPolicyForm(request.POST,request.FILES)
+        if c.is_valid():
+            c.save()
+        return HttpResponse('''<script>alert('Policy added succesfully!');window.location='/govt_policy'</script>''')
+
+class ViewGovt(View):
+    def get(self,request):
+        return render(request, 'administration/view_govt.html')
+    def post(self,request):
+        govt=GovtPolicyTable.objects.all()
+        return render(request, 'administration/view_govt.html',{'govt':govt})
+    
+class ViewGovtPolicy(View):
+    def get(self, request, id):
+        c=GovtPolicyTable.objects.get(id=id)
+        return render(request, 'administration/view_govt_policy.html',{'govt':c})
+
 
 class ManageDoctorsView(View):
     def get(self, request):
@@ -76,6 +94,20 @@ class VerifyPharmacistView(View):
     def get(self, request):
         c=PharmacistTable.objects.all()
         return render(request, 'administration/verify_pharmacist.html',{'pharmacist':c})
+    
+class  AcceptPharmacist(View):
+    def get(self,request,id):
+        c=PharmacistTable.objects.get(id=id)
+        c.Loginid.Userrole='Pharmacist'
+        c.Loginid.save()
+        return HttpResponse('''<script>alert('Pharmacist verified succesfully!');window.location='/verify_pharmacist'</script>''')
+    
+class RejectPharmacist(View):
+    def get(self,request,id):
+        c=PharmacistTable.objects.get(id=id)
+        c.Loginid.Userrole='Rejected'
+        c.Loginid.save()
+        return HttpResponse('''<script>alert('Pharmacist rejected succesfully!');window.location='/verify_pharmacist'</script>''')
     
 
 class ViewAppointmentsView(View):
@@ -134,7 +166,7 @@ class RegisterView(View):
         c=PharmacistForm(request.POST)
         if c.is_valid():
             reg=c.save(commit=False)
-            reg.Loginid=LoginTable.objects.create(Username=reg.Email,Passsword=request.POST['Password'],Userrole='Pharmacist')
+            reg.Loginid=LoginTable.objects.create(Username=reg.Email,Passsword=request.POST['Password'],Userrole='Pending')
             reg.save()
             return HttpResponse('''<script>alert('Pharmacist added succesfully!');window.location='/verify_pharmacist'</script>''')
 
