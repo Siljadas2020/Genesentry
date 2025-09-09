@@ -3,24 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>govt policy</title>
+    <title>add govt policy</title>
 </head>
 <body>
-    <table border="1"  method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-        <h1>ADD & MANAGE GOVERNMENT POLICIES</h1>
-        <br>
-           <tr> 
-            <th>POLICY NAME</th>
-            <th>FILE</th>
-            <th><button><a href="">+</button></th>
-           </tr>
-           <tr>
-                            <td><input type="text" name="PolicyName"></td>
-                            <td><input type="file" placeholder="choose your file" name="file"></td>
-                            <td><button>Delete</button></td>
-
-            </tr>
-         </table>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>ADD GOVERNMENT POLICY</h1>
+        <label>POLICY NAME:</label><input type="text" name="PolicyName"><br><br>
+        <label>FILE:</label><input type="file" name="file"><br><br>
+        <button>ADD</button>
+        
+    </form>
 </body>
 </html>

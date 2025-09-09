@@ -20,16 +20,23 @@
             <th>SI NO</th>
             <th>USER ID</th>
             <th>DOC ID</th>
-            <th>TOKEN</th>
+            <th>DEPARTMENT</th>
             <th>DATE</th>
+            <th>STATUS</th>
+            <th>TOKEN</th>
+            
         </tr>
+        {% for i in appointments %}
         <tr>
-            <td>1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.Userid.Name }}</td>
+            <td>{{ i.Docid.Name }}</td>
+            <td>{{ i.Department }}</td>
+            <td>{{ i.Date }}</td>
+            <td>{{ i.status }}</td>
+            <td>{{ i.Token }}</td>
         </tr>
+        {% endfor %}
     </table>
 </body>
 </html>

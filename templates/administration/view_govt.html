@@ -7,18 +7,21 @@
 </head>
 <body>
     <h1>VIEW & MANAGE GOVERNMENT POLICIES</h1>
-    <table style="width: 100%;">
+    <table border="1" style="width: 100%;">
         <tr>
             <th>SI NO</th>
             <th>POLICY NAME</th>
             <th>FILE</th>
+            <th><a href="/govt_policy">+</a></th>
         </tr>
         {% for i in govt %}
         <tr>
             
             <td>{{ forloop.counter }}</td>
             <td>{{ i.PolicyName }}</td>
-            <td><a href="{{ i.file.url }}" download>Download</a></td>
+            <td><button><a href="{{ i.file.url }}" download>Download</a></button></td>
+            <td><button><a href="/update_govt/{{ i.id }}">Update</a></button><br><button><a href="/delete_govt/{{ i.id }}">Delete</a></button></td>
+            
         </tr>
         {% endfor %}
     </table>

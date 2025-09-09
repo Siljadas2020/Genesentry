@@ -86,6 +86,14 @@ class PostTable(models.Model):
     image=models.ImageField(upload_to='posts/', null=True, blank=True)
     Createdate=models.DateField(null=True,blank=True)
 
+class ReviewTable(models.Model):
+    user_id=models.ForeignKey(UserTable,on_delete=models.CASCADE,null=True,blank=True)
+    doc_name=models.ForeignKey(DoctorTable,on_delete=models.CASCADE,null=True,blank=True)
+    comment=models.TextField(null=True,blank=True)
+    rating=models.IntegerField(null=True,blank=True)
+
+
+
 
 
     

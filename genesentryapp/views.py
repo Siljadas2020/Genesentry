@@ -48,12 +48,11 @@ class GovtPolicyView(View):
         c=GovtPolicyForm(request.POST,request.FILES)
         if c.is_valid():
             c.save()
-        return HttpResponse('''<script>alert('Policy added succesfully!');window.location='/govt_policy'</script>''')
+        return HttpResponse('''<script>alert('Policy added succesfully!');window.location='/view_govt'</script>''')
 
 class ViewGovt(View):
+    
     def get(self,request):
-        return render(request, 'administration/view_govt.html')
-    def post(self,request):
         govt=GovtPolicyTable.objects.all()
         return render(request, 'administration/view_govt.html',{'govt':govt})
     
@@ -61,6 +60,24 @@ class ViewGovtPolicy(View):
     def get(self, request, id):
         c=GovtPolicyTable.objects.get(id=id)
         return render(request, 'administration/view_govt_policy.html',{'govt':c})
+    
+class UpdateGovt(View):
+    def get(self, request,id):
+        c=GovtPolicyTable.objects.get(id=id)
+        return render(request, 'administration/update_govt.html',{'govt':c})
+    def post(self, request, id):
+        c=GovtPolicyTable.objects.get(id=id)
+        form=GovtPolicyForm(request.POST,request.FILES, instance=c)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('''<script>alert('Policy updated succesfully!');window.location='/view_govt'</script>''')
+        return render(request, 'administration/update_govt.html',{'govt':c,'form':form})
+    
+class DeleteGovt(View):
+    def get(self,request,id):
+        c=GovtPolicyTable.objects.get(id=id)
+        c.delete()
+        return HttpResponse('''<script>alert('Policy deleted succesfully!');window.location='/view_govt'</script>''')
 
 
 class ManageDoctorsView(View):
@@ -112,7 +129,8 @@ class RejectPharmacist(View):
 
 class ViewAppointmentsView(View):
     def get(self, request):
-        return render(request, 'administration/view_appointments.html')
+        c=AppointmentTable.objects.all()
+        return render(request, 'administration/view_appointments.html',{'appointments':c})
 
 class ViewPatientsView(View):
     def get(self, request):
@@ -121,7 +139,8 @@ class ViewPatientsView(View):
 
 class ViewReviewView(View):
     def get(self, request):
-        return render(request, 'administration/view_review.html')
+        c=ReviewTable.objects.all()
+        return render(request, 'administration/view_review.html',{'review':c})
 
             ######################################################## Doctor #######################################################
 

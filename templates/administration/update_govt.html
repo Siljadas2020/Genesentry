@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>UPDATE GOVERNMENT POLICY</h1>
+
+        <label>POLICY NAME:</label><input type="text" name="PolicyName" value="{{govt.PolicyName}}"><br><br>
+        <label>FILE:</label><input type="file" name="file" value="{{govt.file}}"><br><br>
+        <button>UPDATE</button>
+    </form>
+</body>
+</html>
