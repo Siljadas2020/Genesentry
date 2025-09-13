@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view appointment</title>
+</head>
+<style>
+    table,th,td {
+        border: 1px solid black;
+    }
+    h1 {
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>VIEW APPOINTMENTS</h1>
+    <table style="width: 100%;">
+        <tr>
+            <th>SI NO</th>
+            <th>USER ID</th>
+            <th>DATE</th>
+            <th>TOKEN</th>
+            
+        </tr>
+        {% for i in appointments %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.Userid.Name }}</td>
+            <td>{{ i.Date }}</td>
+            <td>{{ i.Token }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import redirect, render, HttpResponse
 from django.views import View
 
 from genesentryapp.forms import *
@@ -17,8 +17,8 @@ class LoginView(View):
             request.session['loginid']=user.id
             if user.Userrole=='admin':
                 return render(request, 'administration/admin_home.html ')
-            elif user.Userrole=='doctor':
-                return render(request, 'Doctor/appointments.html')
+            elif user.Userrole=='Doctor':
+                return redirect('doctor_home')
             elif user.Userrole=='pharmacist':
                 return render(request, 'Pharmacy/add.html')
         except LoginTable.DoesNotExist:
@@ -84,6 +84,7 @@ class ManageDoctorsView(View):
     def get(self, request):
         c=DoctorTable.objects.all()
         return render(request, 'administration/manage_doctors.html',{'doctors':c})
+    
 
 class UpdateDocView(View):
     def get(self, request,id):
@@ -102,9 +103,42 @@ class DeleteDocView(View):
         c=LoginTable.objects.get(id=id)
         c.delete()
         return HttpResponse('''<script>alert('Doctor deleted succesfully!');window.location='/manage_doctors'</script>''')
+
+class ManageAppointmentsView(View):
+    def get(self, request):
+        c=AppointmentTable.objects.all()
+        return render(request, 'Doctor/manage_appointments.html',{'appointments':c})      
     
-       
-        
+class ManagePrescriptionView(View):
+    def get(self, request):
+        c=PrescriptionTable.objects.all()
+        return render(request, 'Doctor/manage_prescription.html',{'prescription':c})      
+    
+class AddPostView(View):
+    def get(self, request):
+        return render(request, 'Doctor/add_post.html')
+    
+class ViewRatingView(View):
+    def get(self, request):
+        c=Rating.objects.all()
+        return render(request, 'Doctor/view_rating.html',{'rating':c})
+    
+class SendNotificationView(View):
+    def get(self, request):
+        return render(request, 'Doctor/send_notification.html')
+    
+class ViewAppointmentView(View):
+    def get(self, request):
+        c=AppointmentTable.objects.all()
+        return render(request, 'Doctor/view_appointment.html',{'appointments':c})
+    
+class ViewPrescriptionView(View):
+    def get(self, request):
+        c=PrescriptionTable.objects.all()
+        return render(request, 'Doctor/view_prescription.html',{'prescriptions':c})
+
+             ######################################################## Administration #######################################################
+
     
 
 class VerifyPharmacistView(View):
@@ -161,6 +195,11 @@ class PrescriptionView(View):
     def get(self, request):
         return render(request, 'Doctor/prescription.html')  
     
+class DoctorHomeView(View):
+    def get(self, request):
+        return render(request, 'Doctor/doctor_home.html')
+    
+
 ######################################################Pharmacy###########################################################
 
 

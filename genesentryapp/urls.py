@@ -31,5 +31,14 @@ urlpatterns = [
     path('manage_medicine',ManageMedicineView.as_view(), name='manage_medicine'),
     path('Register',RegisterView.as_view(), name='Register'),
     path('Request',RequestView.as_view(), name='Request'),
+
+    path('doctor_home', DoctorHomeView.as_view(), name='doctor_home'),
+    path('manage_appointments', ManageAppointmentsView.as_view(), name='manage_appointments'),
+    path('manage_prescription', ManagePrescriptionView.as_view(), name='manage_prescription'),
+    path('add_post', AddPostView.as_view(), name='add_post'),
+    path("view_rating", ViewRatingView.as_view(), name="view_rating"),
+    path("send_notification", SendNotificationView.as_view(), name="send_notification"),
+    path("view_appointment", ViewAppointmentView.as_view(), name="view_appointment"),
+    path("view_prescription", ViewPrescriptionView.as_view(), name="view_prescription"),
 ]
 

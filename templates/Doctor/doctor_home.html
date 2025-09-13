@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f9;
+    }
+    header {
+      background: #2c3650;
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+    }
+    nav {
+      background: #343a40;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #ffc107;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #0f1011;
+    }
+    footer {
+      background: #343a40;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Doctor Dashboard</h1>
+    <p>Welcome, Dr. [Doctor Name]</p>
+  </header>
+
+  <nav>
+    <a href="{% url 'view_appointment' %}">View Appointments</a>
+    <a href="{% url 'manage_appointments' %}">Manage Appointments</a>
+    <a href ="{% url 'view_prescription' %}">View Prescriptions</a>
+    <a href="{% url 'manage_prescription' %}">Manage Prescriptions</a>
+    <a href="#">Patient Records</a>
+    <a href="#">Lab Results</a>
+    <a href="{% url 'add_post' %}">Add Post</a>
+    <a href="{% url 'view_rating' %}">Ratings</a>
+    <a href="{% url 'send_notification' %}">Notification</a>
+    <a href="#">Logout</a>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>Today's Appointments</h2>
+      <p>No appointments scheduled yet.</p>
+    </div>
+
+    <div class="card">
+      <h2>Quick Actions</h2>
+      <ul>
+        <li><a href="#">Write Prescription</a></li>
+        <li><a href="#">View Patient History</a></li>
+        <li><a href="#">Add Lab Test Request</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+</body>
+</html>

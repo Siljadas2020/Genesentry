@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+    </style>
+</head>
+<body>
+    <table border="1">
+<tr>
+       VIEW PRESCRIPTIONS
+        <th>USERNAME</th>
+        <th>PRESCRIPTION</th>
+        <th>DATE</th>
+        <th>MEDICINE</th>
+        <th>QUANTITY</th>
+        <th><a href="#">+</a></th>
+
+        </tr>
+        {% for i in prescription %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.Userid.Name }}</td>
+            <td>{{ i.prescription }}</td>
+            <td>{{ i.Date }}</td>
+            <td>{{ i.Medicine }}</td>
+            <td>{{ i.Quantity }}</td>
+            <td><button value="update">Update</button><button value="delete">Delete</button></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
