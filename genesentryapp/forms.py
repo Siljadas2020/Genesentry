@@ -46,7 +46,7 @@ class AppointmentForm(ModelForm):
 class PrescriptionForm(ModelForm):
     class Meta:
         model = PrescriptionTable
-        fields = ['prescription','Date', 'Medicine', 'Quantity']
+        fields = ['prescription','Date', 'Userid']
 
 class PostForm(ModelForm):
     class Meta:

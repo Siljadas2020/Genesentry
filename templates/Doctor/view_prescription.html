@@ -17,7 +17,7 @@
         <th>DATE</th>
         <th>MEDICINE</th>
         <th>QUANTITY</th>
-        <th><a href="#">+</a></th>
+        <th><a href="/manage_prescription">+</a></th>
 
         </tr>
         {% for i in prescription %}
@@ -28,7 +28,7 @@
             <td>{{ i.Date }}</td>
             <td>{{ i.Medicine }}</td>
             <td>{{ i.Quantity }}</td>
-            <td><button value="update">Update</button><button value="delete">Delete</button></td>
+            <td><button value="update"><a href="/manage_prescription/{{ i.id }}/">Update</a></button><button value="delete">Delete</button></td>
         </tr>
         {% endfor %}
     </table>

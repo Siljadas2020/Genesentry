@@ -111,8 +111,8 @@ class ManageAppointmentsView(View):
     
 class ManagePrescriptionView(View):
     def get(self, request):
-        c=PrescriptionTable.objects.all()
-        return render(request, 'Doctor/manage_prescription.html',{'prescription':c})      
+        c=UserTable.objects.all()
+        return render(request, 'Doctor/manage_prescription.html',{'user':c})      
     
 class AddPostView(View):
     def get(self, request):

@@ -76,8 +76,8 @@ class PrescriptionTable(models.Model):
     Docid=models.ForeignKey(DoctorTable,on_delete=models.CASCADE,null=True,blank=True)
     prescription=models.TextField(null=True,blank=True)
     Date=models.DateField(null=True,blank=True)
-    Medicine=models.TextField(null=True,blank=True)
-    Quantity=models.CharField(max_length=100,null=True,blank=True)
+    #Medicine=models.TextField(null=True,blank=True)
+    #Quantity=models.CharField(max_length=100,null=True,blank=True)
 
 class PostTable(models.Model):
     Docid=models.ForeignKey(DoctorTable,on_delete=models.CASCADE,null=True,blank=True)    

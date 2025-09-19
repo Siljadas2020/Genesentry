@@ -20,10 +20,16 @@
 <body>
     <form action="">
         <h1>MANAGE PRESCRIPTIONS</h1>
-        USERNAME : <input type="text"><br></br>
-        DOC_ID   : <input type="text"><br></br>
-        PRESCRIPTION : <input type="text"><br></br>
-        DAY/WEEK : <input type="text"><br></br>
+        USERNAME : <select name="Userid">
+            <option value="null">-- please select a user --</option>
+            {% for i in user %}
+            <option value="{{ i.id }}">{{ i.Name }}</option>
+            {% endfor %}
+        </select></br>
+        PRESCRIPTION : <textarea name="" id=""></textarea><br></br>
+        Date : <input type="text"><br></br>
+        MEDICINE : <input type="text"><br></br>
+        QUANTITY : <input type="text"><br></br>
         <button>SUBMIT</button>
     </form>
 </body>
