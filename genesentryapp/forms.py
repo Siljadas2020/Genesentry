@@ -16,8 +16,8 @@ class PharmacistForm(ModelForm):
 class MedicineForm(ModelForm):
     class Meta:
         model = MedicineTable
-        fields = ['Name', 'Price', 'Quantity']
-
+        fields = ['Name', 'Price', 'Quantity','Stock','Image','ExpiryDate']
+    
 class RatingForm(ModelForm):
     class Meta:
         model = Rating
@@ -26,7 +26,7 @@ class RatingForm(ModelForm):
 class NotificationForm(ModelForm):
     class Meta:
         model = Notification
-        fields = ['Description','Title']
+        fields = ['Description','Title','Userid','Date']
 
 class BookmedicineForm(ModelForm):
     class Meta:

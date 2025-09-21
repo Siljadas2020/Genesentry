@@ -10,18 +10,20 @@
     <table border="1px">
 <tr>
     <th>SI NO</th>
-    <th>DOC_NAME</th>
+    <th>USER_ID</th>
     <th>DOC_ID</th>
-    <th>DEPT</th>
+    <th>FEEDBACK</th>
     <th>RATING</th>
 </tr>
+{% for i in rating %}
 <tr>
-    <td><br></td>
-    <td><br></td>
-    <td><br></td>
-    <td><br></td>
-    <td><br></td>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ i.user_id.Name }}</td>
+    <td>{{ i.doc_name.Name }}</td>
+    <td>{{ i.comment }}</td>
+    <td>{{ i.rating }}</td>
 </tr>
+{% endfor %}
     </table>
 </body>
 </html>

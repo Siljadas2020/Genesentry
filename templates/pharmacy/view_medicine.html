@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Pharmacy</title>
+</head>
+<body>
+    <h1>Medicine Details</h1>
+    <table border="1px">
+        <tr>
+            <th>SI NO</th>
+            <th>MEDICINE NAME</th>
+            <th>PRICE</th>
+            <th>QUANTITY</th>
+            <th>STOCK</th>
+            <th>IMAGE</th>
+            <th>EXPIRY DATE</th>
+            <th><a href="/add_medicine">+</a></th>
+        </tr>
+        {% for i in medicine %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.Name }} </td>
+            <td>{{ i.Price }}</td>
+            <td>{{ i.Quantity }}</td>
+            <td>{{ i.Stock }}</td>
+            <td><img src="{{ i.Image.url }}" alt="{{ i.Name }}" width="100"/></td>
+            <td>{{ i.ExpiryDate }}</td>
+            <td><button onclick="window.location='/update_medicine/{{ i.id }}'">UPDATE</button><br></br>
+           <button onclick="window.location='/DeleteMedicine/{{ i.id }}'">DELETE</button>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

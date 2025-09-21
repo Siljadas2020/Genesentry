@@ -12,23 +12,20 @@
     <table border="1">
 <tr>
        VIEW PRESCRIPTIONS
+       <th>SI/no</th>
         <th>USERNAME</th>
         <th>PRESCRIPTION</th>
         <th>DATE</th>
-        <th>MEDICINE</th>
-        <th>QUANTITY</th>
         <th><a href="/manage_prescription">+</a></th>
 
         </tr>
-        {% for i in prescription %}
+        {% for i in prescriptions %}
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ i.Userid.Name }}</td>
             <td>{{ i.prescription }}</td>
             <td>{{ i.Date }}</td>
-            <td>{{ i.Medicine }}</td>
-            <td>{{ i.Quantity }}</td>
-            <td><button value="update"><a href="/manage_prescription/{{ i.id }}/">Update</a></button><button value="delete">Delete</button></td>
+            <td><button value="update"><a href="/update_prescription/{{ i.id }}/">Update</a></button><button value="delete"><a href="/delete_prescription/{{ i.id }}/">Delete</a></button></td>
         </tr>
         {% endfor %}
     </table>

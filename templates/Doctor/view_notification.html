@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view Notification</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+        <th>SI NO</th>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>DESCRIPTION</th>
+        <th>DATE</th>
+    </tr>
+    {% for i in notification %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.Userid.Name }}</td>
+        <td>{{ i.Title }}</td>
+        <td>{{ i.Description }}</td>
+        <td>{{ i.Date|date:'Y-m-d' }}</td>
+    </tr>
+    {% endfor %}
+
+    </table>
+
+        <button type="submit"><a href="/send_notification">SEND</a></button>
+</body>
+</html>

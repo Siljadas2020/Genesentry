@@ -18,19 +18,18 @@
     </style>
 </head>
 <body>
-    <form action="">
-        <h1>MANAGE PRESCRIPTIONS</h1>
+    <form  method="post">
+        {% csrf_token %}
+        <h1>ADD PRESCRIPTIONS</h1>
         USERNAME : <select name="Userid">
             <option value="null">-- please select a user --</option>
-            {% for i in user %}
-            <option value="{{ i.id }}">{{ i.Name }}</option>
+            {% for i in users %}
+            <option value="{{ i.Userid.id }}">{{ i.Userid.Name }}</option>
             {% endfor %}
         </select></br>
-        PRESCRIPTION : <textarea name="" id=""></textarea><br></br>
-        Date : <input type="text"><br></br>
-        MEDICINE : <input type="text"><br></br>
-        QUANTITY : <input type="text"><br></br>
-        <button>SUBMIT</button>
+        PRESCRIPTION : <textarea name="prescription" ></textarea><br></br>
+        DATE : <input type="date" name="Date"><br></br>
+        <button type="submit">SUBMIT</button>
     </form>
 </body>
 </html>

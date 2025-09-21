@@ -41,6 +41,9 @@ class MedicineTable(models.Model):
     Name=models.CharField(max_length=100,null=True,blank=True)
     Price=models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True)
     Quantity=models.IntegerField(null=True,blank=True)
+    Stock=models.IntegerField(null=True,blank=True)
+    Image=models.ImageField(upload_to='medicine_images/', null=True, blank=True)
+    ExpiryDate=models.DateField(null=True,blank=True)
 
 class Rating(models.Model):
     Userid=models.ForeignKey(UserTable,on_delete=models.CASCADE,null=True,blank=True)
@@ -50,7 +53,9 @@ class Rating(models.Model):
 
 class Notification(models.Model):
     Userid=models.ForeignKey(UserTable,on_delete=models.CASCADE,null=True,blank=True)
+    Docid=models.ForeignKey(DoctorTable,on_delete=models.CASCADE,null=True,blank=True)
     Description=models.TextField(null=True,blank=True)
+    Date=models.DateField(null=True,blank=True)
     Title=models.CharField(max_length=100,null=True,blank=True)
 
 class BookmedicineTable(models.Model):
@@ -83,7 +88,7 @@ class PostTable(models.Model):
     Docid=models.ForeignKey(DoctorTable,on_delete=models.CASCADE,null=True,blank=True)    
     Title=models.CharField(max_length=100,null=True,blank=True)
     Description=models.TextField(null=True,blank=True)
-    image=models.ImageField(upload_to='posts/', null=True, blank=True)
+    image=models.ImageField(upload_to='add_post/', null=True, blank=True)
     Createdate=models.DateField(null=True,blank=True)
 
 class ReviewTable(models.Model):

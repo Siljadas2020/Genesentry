@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+     <style>
+       *{
+        margin: 0;
+        padding: 0;
+       }
+       body{
+           display: flex;
+           justify-content: center;
+           height: 100vh;
+           align-items: center;
+        }  
+    </style>
+</head>
+<body>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+         <h1>Add</h1>
+        <label>Name: <input type="text" name="Name"/></label><br><br>
+        <label>Quantity:<input type="text" name="Quantity"></label><br><br>
+        <label>Price: <input type="text" name="Price"/></label><br><br>
+        <label>Stock: <input type="text" name="Stock"/></label><br><br>
+        <label>image: <input type="file" accept="image/*" name="Image"/></label><br><br>
+        <label>ExpiryDate: <input type="date" name="ExpiryDate"/></label><br><br>
+        <button type="submit">submit</button>
+     </form>
+</body>
+</html>

@@ -19,8 +19,8 @@ class LoginView(View):
                 return render(request, 'administration/admin_home.html ')
             elif user.Userrole=='Doctor':
                 return redirect('doctor_home')
-            elif user.Userrole=='pharmacist':
-                return render(request, 'Pharmacy/add.html')
+            elif user.Userrole=='Pharmacist':
+                return redirect('pharmacist_home')
         except LoginTable.DoesNotExist:
             return render(request, 'administration/login.html',{'error':'Invalid username or password'})
         
@@ -104,28 +104,70 @@ class DeleteDocView(View):
         c.delete()
         return HttpResponse('''<script>alert('Doctor deleted succesfully!');window.location='/manage_doctors'</script>''')
 
-class ManageAppointmentsView(View):
-    def get(self, request):
-        c=AppointmentTable.objects.all()
-        return render(request, 'Doctor/manage_appointments.html',{'appointments':c})      
-    
 class ManagePrescriptionView(View):
     def get(self, request):
-        c=UserTable.objects.all()
-        return render(request, 'Doctor/manage_prescription.html',{'user':c})      
+        c=AppointmentTable.objects.filter(Docid__Loginid__id=request.session['loginid'])
+        return render(request, 'Doctor/manage_prescription.html',{'users':c})      
+    def post(self,request):
+        c=PrescriptionForm(request.POST)
+        d = DoctorTable.objects.get(Loginid__id=request.session['loginid'])
+        if c.is_valid():
+            reg = c.save(commit=False)
+            reg.Docid = d
+            reg.save()
+            return HttpResponse('''<script>alert('Prescription added succesfully!');window.location='/view_prescription'</script>''')    
+        
+class AcceptAppointment(View):
+    def get(self,request,id):
+        c=AppointmentTable.objects.get(id=id)
+        c.status='Accepted'
+        c.save()
+        return HttpResponse('''<script>alert('Appointment accepted succesfully!');window.location='/view_appointment'</script>''')
     
-class AddPostView(View):
-    def get(self, request):
-        return render(request, 'Doctor/add_post.html')
+class RejectAppointment(View):
+    def get(self,request,id):
+        c=AppointmentTable.objects.get(id=id)
+        c.status='Rejected'
+        c.save()
+        return HttpResponse('''<script>alert('Appointment rejected succesfully!');window.location='/view_appointment'</script>''')
     
 class ViewRatingView(View):
     def get(self, request):
-        c=Rating.objects.all()
+        c=ReviewTable.objects.all()
         return render(request, 'Doctor/view_rating.html',{'rating':c})
+    
+class NotificationView(View):
+    def get(self, request):
+      c=Notification.objects.filter(Docid__Loginid__id=request.session['loginid'])
+      return render(request, 'Doctor/view_notification.html',{'notification':c})
+
     
 class SendNotificationView(View):
     def get(self, request):
-        return render(request, 'Doctor/send_notification.html')
+        c=AppointmentTable.objects.filter(Docid__Loginid__id=request.session['loginid'])
+        return render(request, 'Doctor/send_notification.html',{'users':c}) 
+    def post(self,request):
+        print('========================>',request.POST)
+        c=NotificationForm(request.POST)
+        d = DoctorTable.objects.get(Loginid__id=request.session['loginid'])
+        if c.is_valid():
+            reg = c.save(commit=False)
+            reg.Docid = d
+            reg.save()
+            return HttpResponse('''<script>alert('Notification sent succesfully!');window.location='/view_notification'</script>''')    
+
+# class NotificationView(View):
+#     def get(self, request):
+#         return render(request, 'Doctor/send_notification.html')
+#     def post(self,request):
+#         c=NotificationForm(request.POST)
+#         d = DoctorTable.objects.get(Loginid__id=request.session['loginid'])
+#         if c.is_valid():
+#             reg = c.save(commit=False)
+#             reg.Userid = d
+#             reg.save()
+#             return HttpResponse('''<script>alert('Notification sent succesfully!');window.location='/send_notification'</script>''')
+    
     
 class ViewAppointmentView(View):
     def get(self, request):
@@ -187,13 +229,34 @@ class MedicalPostsView(View):
     def get(self, request):
         return render(request, 'Doctor/medicalposts.html')
 
-class NotificationView(View):
-    def get(self, request):
-        return render(request, 'Doctor/notification.html')
-    
+
 class PrescriptionView(View):
     def get(self, request):
         return render(request, 'Doctor/prescription.html')  
+    def post(self,request):
+        c=PrescriptionForm(request.POST)
+        if c.is_valid():
+            c.save()
+            return HttpResponse('''<script>alert('Prescription added succesfully!');window.location='/view_prescription'</script>''')
+        
+class UpdatePrescription(View):
+    def get(self, request,id):
+        c=PrescriptionTable.objects.get(id=id)
+        d = AppointmentTable.objects.filter(Docid__Loginid__id=request.session['loginid'])
+        return render(request, 'Doctor/update_prescription.html',{'prescription':c, 'users':d})
+    def post(self, request, id):
+        c=PrescriptionTable.objects.get(id=id)
+        form=PrescriptionForm(request.POST, instance=c)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('''<script>alert('Prescription updated succesfully!');window.location='/view_prescription'</script>''')
+        return render(request, 'Doctor/update_prescription.html',{'prescription':c,'form':form})
+
+class DeletePrescription(View):
+    def get(self,request,id):
+        c=PrescriptionTable.objects.get(id=id)
+        c.delete()
+        return HttpResponse('''<script>alert('Prescription deleted succesfully!');window.location='/view_prescription'</script>''')
     
 class DoctorHomeView(View):
     def get(self, request):
@@ -203,7 +266,83 @@ class DoctorHomeView(View):
 ######################################################Pharmacy###########################################################
 
 
+class PharmacistHomeView(View):
+    def get(self, request):
+        return render(request, 'pharmacy/pharmacist_home.html')
+
+class AddMedicineView(View):
+    def get(self, request):
+        return render(request, 'pharmacy/add_medicine.html')
+    def post(self, request):
+        c = MedicineForm(request.POST, request.FILES)
+        d = PharmacistTable.objects.get(Loginid__id=request.session['loginid'])
+
+        if c.is_valid():
+            reg = c.save(commit=False)
+            reg.PharmacyId = d
+            reg.save()
+            return HttpResponse('''<script>alert('Medicine added successfully!');window.location='/view_medicine'</script>''')
+        else:
+            return render(request, 'pharmacy/add_medicine.html', {'form': c})
+        
+class ManageMedicineView(View):
+    def get(self, request):
+        c=MedicineTable.objects.all()
+        return render(request, 'pharmacy/view_medicine.html',{'medicine':c})
+        
+class DeleteMedicine(View):
+    def get(self,request,id):
+        c=MedicineTable.objects.get(id=id)
+        c.delete()
+        return HttpResponse('''<script>alert('Medicine deleted succesfully!');window.location='/view_medicine'</script>''')
     
+class UpdateMedicine(View):
+    def get(self, request,id):
+        c=MedicineTable.objects.get(id=id)
+        return render(request, 'pharmacy/update_medicine.html',{'medicine':c})
+    def post(self, request, id):
+        c=MedicineTable.objects.get(id=id)
+        form=MedicineForm(request.POST,request.FILES, instance=c)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('''<script>alert('Medicine updated succesfully!');window.location='/view_medicine'</script>''')
+        return render(request, 'pharmacy/update_medicine.html',{'medicine':c,'form':form})
+
+class AddPostView(View):
+    def get(self, request):
+            return render(request, 'Doctor/add_post.html')
+    def post(self,request):
+        c=PostForm(request.POST,request.FILES)
+        if c.is_valid():
+            reg = c.save(commit=False)
+            d = DoctorTable.objects.get(Loginid__id=request.session['loginid'])
+            reg.Doctorid=d
+            reg.save()
+            return HttpResponse('''<script>alert('Post added succesfully!');window.location='/view_post'</script>''')
+
+class ViewPostView(View):
+    def get(self, request):
+        c=PostTable.objects.all()
+        return render(request, 'Doctor/view_post.html',{'post':c})
+
+class EditPostView(View):
+    def get(self, request,id):
+        c=PostTable.objects.get(id=id)
+        return render(request, 'Doctor/edit_post.html',{'post':c})
+    def post(self, request,id):
+        c=PostTable.objects.get(id=id)
+        form=PostForm(request.POST,request.FILES, instance=c)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('''<script>alert('Post updated succesfully!');window.location='/view_post'</script>''')
+        return render(request, 'Doctor/edit_post.html',{'post':c,'form':form})
+    
+class DeletePost(View):
+    def get(self,request,id):
+        c=PostTable.objects.get(id=id)
+        c.delete()
+        return HttpResponse('''<script>alert('Post deleted succesfully!');window.location='/view_post'</script>''')
+
 class AddView(View):
     def get(self, request):
     
@@ -213,9 +352,10 @@ class EditView(View):
     def get(self, request):
         return render(request, 'Pharmacy/edit.html')
     
-class ManageMedicineView(View):
-    def get(self, request):
-        return render(request, 'Pharmacy/manage_medicine.html')
+# class ManageMedicineView(View):
+    # def get(self, request):
+        # return render(request, 'Pharmacy/manage_medicine.html')
+    
     
 class RegisterView(View):
     def get(self, request):

@@ -20,18 +20,19 @@
             <th>SI NO</th>
             <th>USER ID</th>
             <th>DATE</th>
+            <th>STATUS</th>
             <th>TOKEN</th>
-            <th><a href="#">+</a></th>
-
-            
+            <th>ACTION</th> 
         </tr>
         {% for i in appointments %}
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ i.Userid.Name }}</td>
             <td>{{ i.Date }}</td>
+            <td>{{ i.status }}</td>
             <td>{{ i.Token }}</td>
-            <td><button value="accept">Accept</button><button value="reject">Reject</button></td>
+            <td><button onclick="window.location='/AcceptAppointment/{{ i.id }}'">ACCEPT</button><br></br>
+            <button onclick="window.location='/RejectAppointment/{{ i.id }}'">REJECT</button></td>
         </tr>
         {% endfor %}
     </table>
