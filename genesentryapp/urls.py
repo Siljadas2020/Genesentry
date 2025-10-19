@@ -34,7 +34,14 @@ urlpatterns = [
     path('doctor_home', DoctorHomeView.as_view(), name='doctor_home'),
     path('manage_prescription', ManagePrescriptionView.as_view(), name='manage_prescription'),
     path('update_prescription/<int:id>/', UpdatePrescription.as_view(), name='update_prescription'),
-    path('delete_prescription/<int:id>/', DeletePrescription.as_view(), name='delete_prescription'),    
+    path('delete_prescription/<int:id>/', DeletePrescription.as_view(), name='delete_prescription'),
+    path('new_prescription', NewPrescriptionView.as_view(), name='new_prescription'),
+    path('accept_prescription/<int:id>/', AcceptPrescription.as_view(), name='accept_prescription'),
+    path('reject_prescription/<int:id>/', RejectPrescription.as_view(), name='reject_prescription'),
+    path('order', OrderView.as_view(), name='order'),
+    path('view_order', ViewOrder.as_view(), name='view_order'),
+    path('delete_order/<int:id>/', DeleteOrder.as_view(), name='delete_order'),
+    path('status', StatusView.as_view(), name='status'),
     path('add_post', AddPostView.as_view(), name='add_post'),
     path("view_rating", ViewRatingView.as_view(), name="view_rating"),
     path("send_notification", SendNotificationView.as_view(), name="send_notification"),
@@ -58,6 +65,7 @@ urlpatterns = [
     path('add_medicine',AddMedicineView.as_view(), name='add_medicine'),
     path('view_medicine',ManageMedicineView.as_view(), name='view_medicine'),
     path('update_medicine/<int:id>/', UpdateMedicine.as_view(), name='update_medicine'),
-    path('delete_medicine/<int:id>/', DeleteMedicine.as_view(), name='delete_medicine')
+    path('delete_medicine/<int:id>/', DeleteMedicine.as_view(), name='delete_medicine'),
+    path('profile',PharmacistProfileView.as_view(), name='profile'),
 ]
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Prescription</title>
     <style>
         body {
             display: flex;
@@ -23,8 +23,8 @@
         <h1>ADD PRESCRIPTIONS</h1>
         USERNAME : <select name="Userid">
             <option value="null">-- please select a user --</option>
-            {% for i in users %}
-            <option value="{{ i.Userid.id }}">{{ i.Userid.Name }}</option>
+            {% for i in user_obj %}
+            <option value="{{ i.Userid.id }}">{{ i.Name }}</option>
             {% endfor %}
         </select></br>
         PRESCRIPTION : <textarea name="prescription" ></textarea><br></br>

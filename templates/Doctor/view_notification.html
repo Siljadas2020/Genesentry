@@ -3,29 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>view Notification</title>
+    <title>Notifications</title>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: #f4f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #002855;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
 <body>
-    <table border="1">
+    <h1>NOTIFICATIONS</h1>
+
+    <table border="1px">
         <tr>
-        <th>SI NO</th>
-        <th>ID</th>
-        <th>TITLE</th>
-        <th>DESCRIPTION</th>
-        <th>DATE</th>
-    </tr>
-    {% for i in notification %}
-    <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ i.Userid.Name }}</td>
-        <td>{{ i.Title }}</td>
-        <td>{{ i.Description }}</td>
-        <td>{{ i.Date|date:'Y-m-d' }}</td>
-    </tr>
-    {% endfor %}
-
+            <th>SI NO</th>
+            <th>ID</th>
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>DATE</th>
+        </tr>
+        {% for i in notification %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.Userid.Name }}</td>
+            <td>{{ i.Title }}</td>
+            <td>{{ i.Description }}</td>
+            <td>{{ i.Date|date:'Y-m-d' }}</td>
+        </tr>
+        {% endfor %}
     </table>
-
-        <button type="submit"><a href="/send_notification">SEND</a></button>
+    <button><a href="/send_notification">SEND</a></button>
 </body>
 </html>

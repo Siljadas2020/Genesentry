@@ -65,29 +65,24 @@
 
   <nav>
     <a href="/view_medicine">Medicines</a>
-    <a href="#">Orders</a>
-    <a href="#">Profile</a>
+    <a href="/view_order">Your Orders</a>        
+    <a href="/profile">Profile</a>
   </nav>
 
   <div class="container">
     <div class="card">
-      <h3>New Prescriptions</h3>
+      <h3><a href="{% url 'new_prescription' %}">New Prescription</a></h3>
       <p>View and manage the latest prescriptions from doctors.</p>
     </div>
 
     <div class="card">
-      <h3>Medicine Inventory</h3>
+      <h3><a href="{% url 'status' %}">Status</a></h3>
       <p>Track available stock and update medicine details.</p>
     </div>
 
     <div class="card">
-      <h3>Orders</h3>
+      <h3><a href="{% url 'order' %}">Order Medicine</a></h3>
       <p>Check recent orders and process deliveries efficiently.</p>
-    </div>
-
-    <div class="card">
-      <h3>Profile Settings</h3>
-      <p>Update your personal information and account settings.</p>
     </div>
   </div>
 

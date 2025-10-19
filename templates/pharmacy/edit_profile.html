@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Profile</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fafafa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .edit-container {
+      background: #fff;
+      width: 360px;
+      border-radius: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      padding: 25px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .header p {
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 5px;
+      color: #444;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+
+    input:focus, select:focus {
+      border-color: #ff4d4d;
+      box-shadow: 0 0 5px rgba(255,77,77,0.4);
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+    }
+
+    .save-btn, .cancel-btn {
+      width: 48%;
+      padding: 10px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .save-btn {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    .save-btn:hover {
+      background-color: #e63e3e;
+    }
+
+    .cancel-btn {
+      background-color: #eee;
+      color: #333;
+    }
+
+    .cancel-btn:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="edit-container">
+    <div class="header">
+      <h2>Edit Profile</h2>
+      <p>Update your information below</p>
+    </div>
+
+    <form>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" value="Vismaya Vinod" />
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" value="@pharmacyuser" />
+      </div>
+
+      <div class="form-group">
+        <label for="language">Language</label>
+        <select id="language">
+          <option>English</option>
+          <option>Malayalam</option>
+          <option>Hindi</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" value="Kochi, India" />
+      </div>
+
+      <div class="btn-group">
+        <button class="cancel-btn" type="button" onclick="window.location.href='profile.html'">Cancel</button>
+        <button class="save-btn" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

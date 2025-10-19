@@ -52,3 +52,8 @@ class PostForm(ModelForm):
     class Meta:
         model = PostTable
         fields = ['Title', 'Description', 'image', 'Createdate']
+
+class orderTableForm(ModelForm):
+    class Meta:
+        model = OrderTable
+        fields = ['MedicineName', 'Quantity','Company','Location','ExpiryDate']

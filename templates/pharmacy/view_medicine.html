@@ -28,7 +28,7 @@
             <td><img src="{{ i.Image.url }}" alt="{{ i.Name }}" width="100"/></td>
             <td>{{ i.ExpiryDate }}</td>
             <td><button onclick="window.location='/update_medicine/{{ i.id }}'">UPDATE</button><br></br>
-           <button onclick="window.location='/DeleteMedicine/{{ i.id }}'">DELETE</button>
+           <button onclick="window.location='/delete_medicine/{{ i.id }}'">DELETE</button>
         </tr>
         {% endfor %}
     </table>

@@ -6,11 +6,17 @@
     <title>Update Medicine</title>
 </head>
 <body>
-    <h1>Update Medicine</h1>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Update</button>
+        <h1>Update Medicine</h1>
+        <label>Name: <input type="text" name="Name" value="{{Medicine.Name}}"></label><br><br>
+        <label>Quantity:<input type="text" name="Quantity" value="{{Medicine.Quantity}}"></label><br><br>
+        <label>Price: <input type="text" name="Price" value="{{Medicine.Price}}"/></label><br><br>
+        <label>Stock: <input type="text" name="Stock" value="{{Medicine.Stock}}"/></label><br><br>
+        <label>image: <input type="file" accept="image/*" name="Image"></label><br><br>
+        <label>ExpiryDate: <input type="date" name="ExpiryDate" value="{{Medicine.ExpiryDate|date:'Y-m-d'}}"/></label><br><br>
+        <button type="submit">submit</button>
+
     </form>
 </body>
 </html>

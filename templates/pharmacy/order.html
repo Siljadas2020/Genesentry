@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h1>Order Medicine</h1>
+        <label>MedicineName: <input type="text" name="MedicineName" value="{{Order.MedicineName}}"/></label><br><br>
+        <label>Quantity:<input type="text" name="Quantity" value="{{Order.Quantity}}"></label><br><br>
+        <label>Company: <input type="text" name="Company" value="{{Order.Company}}"/></label><br><br>
+        <label>Location:<input type="text" name="Location" value="{{Order.Location}}"></label><br><br>
+        <label>ExpiryDate: <input type="date" name="ExpiryDate" value="{{Order.ExpiryDate|date:'Y-m-d'}}"/></label><br><br>
+        <button type="submit">Order</button>
+
+    </form>
+
+</body>
+</html> 

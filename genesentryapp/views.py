@@ -107,10 +107,11 @@ class DeleteDocView(View):
 class ManagePrescriptionView(View):
     def get(self, request):
         c=AppointmentTable.objects.filter(Docid__Loginid__id=request.session['loginid'])
-        return render(request, 'Doctor/manage_prescription.html',{'users':c})      
+        user_obj=UserTable.objects.all()
+        return render(request, 'Doctor/manage_prescription.html',{'users':c,'user_obj':user_obj})      
     def post(self,request):
         c=PrescriptionForm(request.POST)
-        d = DoctorTable.objects.get(Loginid__id=request.session['loginid'])
+        d = DoctorTable.objects.get(Loginid_id=request.session['loginid'])
         if c.is_valid():
             reg = c.save(commit=False)
             reg.Docid = d
@@ -145,7 +146,7 @@ class NotificationView(View):
 class SendNotificationView(View):
     def get(self, request):
         c=AppointmentTable.objects.filter(Docid__Loginid__id=request.session['loginid'])
-        return render(request, 'Doctor/send_notification.html',{'users':c}) 
+        return render(request, 'Doctor/send_notification.html',{'users':c})     
     def post(self,request):
         print('========================>',request.POST)
         c=NotificationForm(request.POST)
@@ -239,11 +240,14 @@ class PrescriptionView(View):
             c.save()
             return HttpResponse('''<script>alert('Prescription added succesfully!');window.location='/view_prescription'</script>''')
         
+
+
 class UpdatePrescription(View):
     def get(self, request,id):
         c=PrescriptionTable.objects.get(id=id)
+        user_obj=UserTable.objects.all()
         d = AppointmentTable.objects.filter(Docid__Loginid__id=request.session['loginid'])
-        return render(request, 'Doctor/update_prescription.html',{'prescription':c, 'users':d})
+        return render(request, 'Doctor/update_prescription.html',{'prescription':c, 'users':d,'user_obj':user_obj})
     def post(self, request, id):
         c=PrescriptionTable.objects.get(id=id)
         form=PrescriptionForm(request.POST, instance=c)
@@ -269,6 +273,12 @@ class DoctorHomeView(View):
 class PharmacistHomeView(View):
     def get(self, request):
         return render(request, 'pharmacy/pharmacist_home.html')
+    
+class PharmacistProfileView(View):
+    def get(self, request):
+        c=PharmacistTable.objects.get(Loginid__id=request.session['loginid'])
+        return render(request, 'pharmacy/profile.html',{'pharmacist':c})
+    
 
 class AddMedicineView(View):
     def get(self, request):
@@ -375,3 +385,51 @@ class RegisterView(View):
 class RequestView(View):
     def get(self, request):
         return render(request, 'Pharmacy/request.html')
+    
+
+class NewPrescriptionView(View):
+    def get(self, request):
+        c=PrescriptionTable.objects.all()
+        return render(request, 'pharmacy/newprescription.html',{'prescriptions':c})
+    
+class AcceptPrescription(View):
+    def get(self,request,id):
+        c=PrescriptionTable.objects.get(id=id)
+        c.status='Accepted'
+        c.save()
+        return HttpResponse('''<script>alert('Prescription accepted succesfully!');window.location='/new_prescription'</script>''')
+
+class RejectPrescription(View):
+    def get(self,request,id):
+        c=PrescriptionTable.objects.get(id=id)
+        c.status='Rejected'
+        c.save()
+        return HttpResponse('''<script>alert('Prescription rejected succesfully!');window.location='/new_prescription'</script>''')
+    
+class StatusView(View):
+    def get(self, request):
+        return render(request, 'pharmacy/status.html')
+    
+class OrderView(View):
+    def get(self, request):
+        c=OrderTable.objects.all()
+        return render(request, 'pharmacy/order.html',{'orders':c})
+    def post(self,request):
+        c=orderTableForm(request.POST)
+        d = PharmacistTable.objects.get(Loginid__id=request.session['loginid'])
+        if c.is_valid():
+            reg = c.save(commit=False)
+            reg.PharmacyId = d
+            reg.save()
+            return HttpResponse('''<script>alert('Order placed succesfully!');window.location='/view_order'</script>''')
+    
+    
+class ViewOrder(View):
+    def get(self, request):
+        c=OrderTable.objects.all()
+        return render(request, 'pharmacy/view_order.html',{'orders':c})
+class DeleteOrder(View):
+    def get(self,request,id):
+        c=OrderTable.objects.get(id=id)
+        c.delete()
+        return HttpResponse('''<script>alert('Order deleted succesfully!');window.location='/view_order'</script>''')

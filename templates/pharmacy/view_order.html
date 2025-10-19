@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Order</title>
+</head>
+<body>
+<table border="1px">
+    <h1>YOUR ORDERS</h1>
+    <tr>
+        <th>Order ID</th>
+        <th>Medicine Name</th>
+        <th>Quantity</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Expiry Date</th>
+        <th>Action</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.MedicineName }}</td>
+        <td>{{ order.Quantity }}</td>
+        <td>{{ order.Company }}</td>
+        <td>{{ order.Location }}</td>
+        <td>{{ order.ExpiryDate|date:'Y-m-d' }}</td>
+        <td><a href="{% url 'delete_order' order.id %}">Delete</a>
+   </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+
+    

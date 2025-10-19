@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescriptions</title>
+    <style>
+      
+       table,th,td{
+          border: 1px solid black;
+        }  
+    </style>
+</head>
+<body>
+    <div>
+    <h1>PRESCRIPTIONS</h1>
+    <table style="width: 100%;">
+        <tr>
+       <th>SI_NO</th>
+       <th>User_id</th>
+       <th>Image</th>
+       <th>Duration</th>
+       <th>Prescription</th>
+       <th>Actions</th>
+       </tr>
+       <tr>
+        {% for p in prescriptions %}
+        <td>{{ forloop.counter }}</td>
+        <td>{{p.Userid.Name}}</td>
+        <td><img src="{{ p.Image.url }}" alt="Prescription Image" width="100"/></td>
+        <td>{{p.duration}}</td>
+        <td>{{p.prescription}}</td>
+        <td>
+            <a href="{% url 'accept_prescription' p.id %}"><button>Accept</button></a>
+            <a href="{% url 'reject_prescription' p.id %}"><button>Reject</button></a>
+        </td>
+        </tr>
+        {% endfor %}
+       </tr>
+
+    </table>
+    </div>
+</body>
+</html>

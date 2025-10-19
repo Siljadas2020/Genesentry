@@ -44,6 +44,7 @@ class MedicineTable(models.Model):
     Stock=models.IntegerField(null=True,blank=True)
     Image=models.ImageField(upload_to='medicine_images/', null=True, blank=True)
     ExpiryDate=models.DateField(null=True,blank=True)
+    Company=models.CharField(max_length=100,null=True,blank=True)
 
 class Rating(models.Model):
     Userid=models.ForeignKey(UserTable,on_delete=models.CASCADE,null=True,blank=True)
@@ -79,6 +80,8 @@ class AppointmentTable(models.Model):
 class PrescriptionTable(models.Model):
     Userid=models.ForeignKey(UserTable,on_delete=models.CASCADE,null=True,blank=True)
     Docid=models.ForeignKey(DoctorTable,on_delete=models.CASCADE,null=True,blank=True)
+    Image=models.ImageField(upload_to='prescriptions/', null=True, blank=True)
+    duration=models.CharField(max_length=100,null=True,blank=True)
     prescription=models.TextField(null=True,blank=True)
     Date=models.DateField(null=True,blank=True)
     #Medicine=models.TextField(null=True,blank=True)
@@ -96,6 +99,17 @@ class ReviewTable(models.Model):
     doc_name=models.ForeignKey(DoctorTable,on_delete=models.CASCADE,null=True,blank=True)
     comment=models.TextField(null=True,blank=True)
     rating=models.IntegerField(null=True,blank=True)
+
+
+class OrderTable(models.Model):
+    PharmacyId = models.ForeignKey(PharmacistTable,on_delete=models.CASCADE,null=True,blank=True)
+    Location=models.CharField(max_length=200,null=True,blank=True)
+    MedicineName=models.CharField(max_length=100,null=True,blank=True)
+    Quantity=models.IntegerField(null=True,blank=True)
+    Company=models.CharField(max_length=100,null=True,blank=True)
+    ExpiryDate=models.DateField(null=True,blank=True)
+    Status=models.CharField(max_length=100,null=True,blank=True, default='Pending')
+    OrderDate=models.DateField(auto_now_add=True)
 
 
 
