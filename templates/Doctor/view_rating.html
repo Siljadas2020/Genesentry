@@ -1,29 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Ratings</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #e9f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #007b8f;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #00a5b9;
+      padding-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    table {
+      width: 100%;
+      max-width: 900px;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 123, 143, 0.1);
+    }
+
+    th, td {
+      text-align: center;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      font-size: 15px;
+    }
+
+    th {
+      background-color: #007b8f;
+      color: white;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f7fdfd;
+    }
+
+    tr:hover {
+      background-color: #e1f4f5;
+      transition: 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      th, td {
+        font-size: 13px;
+        padding: 8px;
+      }
+      table {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>VIEW RATING</h1>
-    <table border="1px">
-<tr>
-    <th>SI NO</th>
-    <th>USER_ID</th>
-    <th>DOC_ID</th>
-    <th>FEEDBACK</th>
-    <th>RATING</th>
-</tr>
-{% for i in rating %}
-<tr>
-    <td>{{ forloop.counter }}</td>
-    <td>{{ i.user_id.Name }}</td>
-    <td>{{ i.doc_name.Name }}</td>
-    <td>{{ i.comment }}</td>
-    <td>{{ i.rating }}</td>
-</tr>
-{% endfor %}
-    </table>
+  <h1>View Ratings</h1>
+
+  <table>
+    <tr>
+      <th>SI NO</th>
+      <th>USER NAME</th>
+      <th>DOCTOR NAME</th>
+      <th>FEEDBACK</th>
+      <th>RATING</th>
+    </tr>
+    {% for i in rating %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.Userid.Name }}</td>
+      <td>{{ i.Docid.Name }}</td>
+      <td>{{ i.Feedback }}</td>
+      <td>{{ i.Rating }}</td>
+    </tr>
+    {% endfor %}
+  </table>
 </body>
 </html>

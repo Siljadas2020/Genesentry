@@ -3,16 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add govt policy</title>
+    <title>Add Government Policy</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e9f5f5; /* soft hospital blue background */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 40px 35px;
+            width: 400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #007b8f; /* medical teal-blue */
+            margin-bottom: 30px;
+            font-size: 22px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #00a5b9;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fafafa;
+            color: #333;
+            margin-bottom: 20px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="file"]:focus {
+            border-color: #00a5b9;
+            background-color: #fff;
+            box-shadow: 0 0 6px rgba(0, 165, 185, 0.4);
+        }
+
+        button {
+            background-color: #007b8f;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #009fb3;
+            box-shadow: 0 0 8px rgba(0, 165, 185, 0.4);
+        }
+
+        ::file-selector-button {
+            background-color: #00a5b9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        ::file-selector-button:hover {
+            background-color: #0090a3;
+        }
+    </style>
 </head>
 <body>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h1>ADD GOVERNMENT POLICY</h1>
-        <label>POLICY NAME:</label><input type="text" name="PolicyName"><br><br>
-        <label>FILE:</label><input type="file" name="file"><br><br>
-        <button>ADD</button>
-        
+        <label>POLICY NAME:</label>
+        <input type="text" name="PolicyName" placeholder="Enter policy name">
+
+        <label>FILE:</label>
+        <input type="file" name="file">
+
+        <button type="submit">ADD</button>
     </form>
 </body>
 </html>

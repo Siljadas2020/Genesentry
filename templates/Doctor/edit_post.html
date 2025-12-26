@@ -1,32 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Medical Related Posts</title>
-    <style>
-        body {
-            justify-content: center;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-        h1 {
-            font-family: fantasy;
-            font-display: initial;
-            letter-spacing: 1mm;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Medical Related Posts</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #e9f5f5; /* Soft hospital blue */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-    </style>
+    form {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 123, 143, 0.15);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #007b8f;
+      font-size: 26px;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #00a5b9;
+      display: inline-block;
+      padding-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #005f6a;
+      display: block;
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    input[type="file"]:focus {
+      outline: none;
+      border-color: #00a5b9;
+      box-shadow: 0 0 6px rgba(0, 165, 185, 0.4);
+    }
+
+    input[type="submit"] {
+      background-color: #00a5b9;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0090a3;
+      box-shadow: 0 0 8px rgba(0, 165, 185, 0.4);
+    }
+
+    @media (max-width: 600px) {
+      form {
+        width: 90%;
+        padding: 25px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
-     <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h1 style="text-align: center;">EDIT</h1> <br>
-        TITLE : <input type="text" name="Title" value="{{post.Title}}"> <br></br>
-        IMAGE : <input type="file" name="image" value="{{post.image}}"> <br></br>
-        DESCRIPTIONS : <input type="text" name="Description" value="{{post.Description}}"> <br></br> 
-        DATE : <input type="date" name="Createdate" value="{{post.Createdate|date:'Y-m-d'}}"> <br></br>
-        <input type="submit" value="SUBMIT">
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1>Edit Post</h1>
+
+    <label>TITLE:</label>
+    <input type="text" name="Title" value="{{ post.Title }}" required>
+
+    <label>IMAGE:</label>
+    <input type="file" name="image">
+
+    <label>DESCRIPTION:</label>
+    <input type="text" name="Description" value="{{ post.Description }}" required>
+
+    <label>DATE:</label>
+    <input type="date" name="Createdate" value="{{ post.Createdate|date:'Y-m-d' }}" required>
+
+    <input type="submit" value="UPDATE">
+  </form>
 </body>
 </html>

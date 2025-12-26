@@ -6,6 +6,7 @@ from genesentryapp.views import *
 
 urlpatterns = [
     path('', LoginView.as_view(),name='login'),
+    path('logout', LogoutView.as_view(),name='logout'),
     path('admin_home', AdminHomeView.as_view(), name='admin_home'),
     path('add_doc', AddDoctorView.as_view(), name='add_doc'),
     path('govt_policy', GovtPolicyView.as_view(), name='govt_policy'),
@@ -38,7 +39,7 @@ urlpatterns = [
     path('new_prescription', NewPrescriptionView.as_view(), name='new_prescription'),
     path('accept_prescription/<int:id>/', AcceptPrescription.as_view(), name='accept_prescription'),
     path('reject_prescription/<int:id>/', RejectPrescription.as_view(), name='reject_prescription'),
-    path('order', OrderView.as_view(), name='order'),
+    # path('order', OrderView.as_view(), name='order'),
     path('view_order', ViewOrder.as_view(), name='view_order'),
     path('delete_order/<int:id>/', DeleteOrder.as_view(), name='delete_order'),
     path('status', StatusView.as_view(), name='status'),
@@ -50,6 +51,7 @@ urlpatterns = [
     path("view_prescription", ViewPrescriptionView.as_view(), name="view_prescription"),
     path('AcceptAppointment/<int:id>/', AcceptAppointment.as_view(), name='AcceptAppointment'),
     path('RejectAppointment/<int:id>/', RejectAppointment.as_view(), name='RejectAppointment'),
+    # path('family_history/<int:id>/',familyHistoryView.as_view(), name='family_history'),
     path("view_post", ViewPostView.as_view(), name="view_post"),
     path('add_post', AddPostView.as_view(), name='add_post'),
     path('edit_post/<int:id>/', EditPostView.as_view(), name='edit_post'),
@@ -67,5 +69,29 @@ urlpatterns = [
     path('update_medicine/<int:id>/', UpdateMedicine.as_view(), name='update_medicine'),
     path('delete_medicine/<int:id>/', DeleteMedicine.as_view(), name='delete_medicine'),
     path('profile',PharmacistProfileView.as_view(), name='profile'),
+    path('update-order/<int:order_id>/<str:status>/', update_order_status, name='update_order_status'),
+
+
+# //////////////////////////////  API  ///////////////////////////////
+
+
+    path('api/register/', UserRegApiView.as_view(), name='register'),
+    path('api/login/', loginApiView.as_view(), name='login'),
+    path('api/doctors/', ViewDoctorAPI.as_view(), name='doctors'),
+    path('api/appointment/<int:lid>', AppointmentBooking.as_view(), name='doctors'),
+    path('api/prescription/<int:lid>', ViewPrescriptionAPI.as_view(), name='doctors'),
+    path('api/policy/', GovtPolicyViewAPI.as_view(), name='policy'),
+    path('api/post/', PostViewAPI.as_view(), name='post'),
+    path('api/pharmacists/', ViewPharmacistsAPI.as_view(), name='post'),
+    path('api/appointmenthistory/<int:lid>/', AppointmentHistory.as_view(), name='post'),
+    path('api/ordermedicine/<int:lid>/', BookMedicinesAPI.as_view(), name='post'),
+    path('api/orderhistory/<int:lid>/', OrderHistoryAPI.as_view(), name='post'),
+    path('api/notification/<int:lid>/', NotificationViewAPI.as_view(), name='post'),
+    path('api/predict/', PredictGeneticDisorder.as_view(), name='predict_genetic_disorder'),
+    path('api/predict1/', PredictGeneticDisorder1.as_view(), name='predict_genetic_disorder1'),
+    path('api/feedback/<int:id>/', FeedBackAPi.as_view(), name='feedback'),
+    path('api/bot/<int:lid>/', MedicalChatbotAPIView.as_view()),
+    path('history/<int:id>/', HistoryView.as_view(), name='history'), 
+
 ]
 

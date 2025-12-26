@@ -1,21 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>update prescription</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Prescription</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #e9f5f5; /* Soft hospital blue */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 123, 143, 0.15);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #007b8f;
+      font-size: 26px;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #00a5b9;
+      display: inline-block;
+      padding-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #005f6a;
+      display: block;
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    select,
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    select:focus,
+    input[type="date"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #00a5b9;
+      box-shadow: 0 0 6px rgba(0, 165, 185, 0.4);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      background-color: #00a5b9;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0090a3;
+      box-shadow: 0 0 8px rgba(0, 165, 185, 0.4);
+    }
+
+    @media (max-width: 600px) {
+      form {
+        width: 90%;
+        padding: 25px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <form action="/update_prescription/{{ prescription.id }}/" method="post">
-        {% csrf_token %}
-        <h1>UPDATE PRESCRIPTION</h1>
-        USERNAME : <select name="Userid">
-            {% for i in user_obj %}
-            <option value="{{ i.Userid.id }}" {% if i.Userid.id == prescription.Userid.id %}selected{% endif %}>{{ i.Name }}</option>
-            {% endfor %}
-        </select></br>
-        PRESCRIPTION : <textarea name="prescription">{{prescription.prescription}}</textarea><br></br>
-        DATE : <input type="date" name="Date" value="{{prescription.Date|date:'Y-m-d'}}"><br></br>
-        <button type="submit">SUBMIT</button>
+  <form action="/update_prescription/{{ prescription.id }}/" method="post">
+    {% csrf_token %}
+    <h1>Update Prescription</h1>
+
+    <label>Username:</label>
+    <select name="Userid">
+      {% for i in users  %}
+      <option value="{{ i.Userid.id }}" {% if i.Userid.id == prescription.Userid.id %}selected{% endif %}>
+        {{ i.Userid.Name }}
+      </option>
+      {% endfor %}
+    </select>
+
+    <label>Prescription:</label>
+    <textarea name="prescription">{{ prescription.prescription }}</textarea>
+
+    <label>Date:</label>
+    <input type="date" name="Date" value="{{ prescription.Date|date:'Y-m-d' }}">
+
+    <button type="submit">Submit</button>
+  </form>
 </body>
 </html>

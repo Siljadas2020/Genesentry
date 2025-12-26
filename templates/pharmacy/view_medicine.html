@@ -4,33 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Pharmacy</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #e9f5f5;
+            font-family: 'Poppins', sans-serif;
+            padding: 40px 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007b8f;
+            font-size: 28px;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #00a5b9;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 123, 143, 0.15);
+        }
+
+        .table thead th {
+            background-color: #007b8f;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .table tbody tr:hover {
+            background-color: #dff7f9;
+        }
+
+        img {
+            border-radius: 10px;
+        }
+
+        /* Round Action Buttons */
+        .btn-update {
+            background-color: #009fb3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-weight: 600;
+        }
+
+        .btn-update:hover {
+            background-color: #00bcd4;
+        }
+
+        .btn-delete {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-weight: 600;
+        }
+
+        .btn-delete:hover {
+            background-color: #ff4d5a;
+        }
+
+        /* Add Button */
+        .add-btn {
+            background-color: #007b8f;
+            color: white;
+            font-size: 20px;
+            padding: 6px 14px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background-color: #009fb3;
+        }
+    </style>
+
 </head>
 <body>
-    <h1>Medicine Details</h1>
-    <table border="1px">
-        <tr>
-            <th>SI NO</th>
-            <th>MEDICINE NAME</th>
-            <th>PRICE</th>
-            <th>QUANTITY</th>
-            <th>STOCK</th>
-            <th>IMAGE</th>
-            <th>EXPIRY DATE</th>
-            <th><a href="/add_medicine">+</a></th>
-        </tr>
-        {% for i in medicine %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ i.Name }} </td>
-            <td>{{ i.Price }}</td>
-            <td>{{ i.Quantity }}</td>
-            <td>{{ i.Stock }}</td>
-            <td><img src="{{ i.Image.url }}" alt="{{ i.Name }}" width="100"/></td>
-            <td>{{ i.ExpiryDate }}</td>
-            <td><button onclick="window.location='/update_medicine/{{ i.id }}'">UPDATE</button><br></br>
-           <button onclick="window.location='/delete_medicine/{{ i.id }}'">DELETE</button>
-        </tr>
-        {% endfor %}
-    </table>
+
+    <div class="container">
+
+    <h1>MEDICINE DETAILS</h1>
+
+    <div class="card p-4">
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>SI NO</th>
+                        <th>MEDICINE NAME</th>
+                        <th>PRICE</th>
+                        <th>QUANTITY</th>
+                        <th>STOCK</th>
+                        <th>IMAGE</th>
+                        <th>EXPIRY DATE</th>
+                        <th>
+                            <a href="/add_medicine" class="add-btn">+</a>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for i in medicine %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.Name }}</td>
+                        <td>{{ i.Price }}</td>
+                        <td>{{ i.Quantity }}</td>
+                        <td>{{ i.Stock }}</td>
+                        <td>
+                            <img src="{{ i.Image.url }}" alt="{{ i.Name }}" width="80">
+                        </td>
+                        <td>{{ i.ExpiryDate }}</td>
+
+                        <td>
+                            <button 
+                                class="btn-update mb-2"
+                                onclick="window.location='/update_medicine/{{ i.id }}'">
+                                UPDATE
+                            </button><br>
+
+                            <button 
+                                class="btn-delete"
+                                onclick="window.location='/delete_medicine/{{ i.id }}'">
+                                DELETE
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

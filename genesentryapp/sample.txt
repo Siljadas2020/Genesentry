@@ -1,0 +1,5 @@
+predicts "Leigh syndrome: "11.0,No,No,Yes,No,5.20905799917528,45.0,44.0,Tachypnea,Tachycardia,Male,No,6.669552178444405"
+python main.py "5.0,No,Yes,Yes,No,4.711425902404955,45.0,40.0,Normal (30-60),Tachycardia,Female,No,9.186659095017331": Predicted Disorder Subclass: Diabetes
+python main.py "10.0,No,No,Yes,Yes,5.078576875932905,41.0,38.0,Tachypnea,Tachycardia,Male,No,7.172111493111108" Predicted Disorder Subclass: Cystic fibrosis
+python main.py "11.0,No,No,Yes,No,5.20905799917528,45.0,44.0,Tachypnea,Tachycardia,Male,No,6.669552178444405" → Predicted: Leigh syndrome
+python main.py "11.0,Yes,Yes,No,No,5.117909242693312,51.0,41.0,Tachypnea,Tachycardia,Male,Yes,6.872167523839368" → Predicted: Tay-Sachs

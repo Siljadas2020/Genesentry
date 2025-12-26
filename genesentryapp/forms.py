@@ -11,7 +11,7 @@ class DoctorForm(ModelForm):
 class PharmacistForm(ModelForm):
     class Meta:
         model = PharmacistTable
-        fields = ['Name', 'Email', 'Age', 'Gender', 'Qualification', 'Phoneno']
+        fields = ['Name', 'Email', 'Age', 'Gender', 'Qualification', 'Phoneno', 'Address']
 
 class MedicineForm(ModelForm):
     class Meta:
@@ -41,7 +41,7 @@ class GovtPolicyForm(ModelForm):
 class AppointmentForm(ModelForm):
     class Meta:
         model = AppointmentTable
-        fields = ['Department', 'Date', 'status', 'Token'] 
+        fields = ['Date', 'status', 'Token'] 
 
 class PrescriptionForm(ModelForm):
     class Meta:
@@ -53,7 +53,7 @@ class PostForm(ModelForm):
         model = PostTable
         fields = ['Title', 'Description', 'image', 'Createdate']
 
-class orderTableForm(ModelForm):
-    class Meta:
-        model = OrderTable
-        fields = ['MedicineName', 'Quantity','Company','Location','ExpiryDate']
+# class orderTableForm(ModelForm):
+#     class Meta:
+#         model = OrderTable
+#         fields = ['MedicineName', 'Quantity','Company','Location','ExpiryDate']

@@ -59,7 +59,7 @@
 <body>
   <header>
     <h1>Doctor Dashboard</h1>
-    <p>Welcome, Dr. [Doctor Name]</p>
+    <p>Welcome, Dr. {{ doctor.Name }}</p>
   </header>
 
   <nav>
@@ -68,8 +68,7 @@
     <a href="{% url 'view_post' %}">Post</a>
     <a href="{% url 'view_rating' %}">Ratings</a>
     <a href="{% url 'view_notification' %}">Notification</a>
-     <a href="#">Patient Records</a>
-    <a href="#">Logout</a>
+    <a href="/logout">Logout</a>
   </nav>
 
   <div class="container">
@@ -81,8 +80,8 @@
     <div class="card">
       <h2>Quick Actions</h2>
       <ul>
-        <li><a href="#">Write Prescription</a></li>
-        <li><a href="#">View Patient History</a></li>
+        <li><a href="{% url 'view_prescription' %}">Write Prescription</a></li>
+        <li><a href="{% url 'view_appointment' %}">View Patient History</a></li>
       </ul>
     </div>
   </div>

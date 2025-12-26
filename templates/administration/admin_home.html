@@ -112,7 +112,7 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <h2>Admin Panel</h2>
-    <a href="#">Dashboard</a>
+    <a href="/admin_home">Dashboard</a>
     <a href="/manage_doctors">Doctors</a>
     <a href="/view_patients">Patients</a>
     <a href="/verify_pharmacist">Pharmacists</a>
@@ -128,28 +128,30 @@
       <h1>Admin Home</h1>
       <div class="profile">Welcome, Admin</div>
     </div>
-
-    <!-- Dashboard -->
+    {% block body %}
     <div class="dashboard">
       <div class="cards">
         <div class="card">
           <h3>Total Doctors</h3>
-        
+        {{ doctor_count }}
         </div>
         <div class="card">
           <h3>Total Patients</h3>
-        
+        {{ patient_count }}
         </div>
         <div class="card">
           <h3>Pharmacists</h3>
-          
+          {{ pharmacist_count }}
         </div>
         <div class="card">
           <h3>Policies</h3>
-        
+        {{ govt_policy_count }}
         </div>
+        {% endblock %}
       </div>
+
     </div>
+
   </div>
 
     

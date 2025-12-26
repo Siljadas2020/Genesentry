@@ -1,21 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>manage doctors</title>
-</head>
-<style>
-    table,th,td {
-        border: 1px solid black;
-    }
-    h1{
-        text-align: center;
-    }
-</style>
-<body>
+{% extends 'administration/admin_home.html' %}
+{% block body %}
+      <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e9f5f5; /* Soft hospital blue background */
+            color: #333;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007b8f; /* Teal hospital color */
+            font-size: 26px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            border-bottom: 3px solid #00a5b9;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-left: 20px;
+        }
+
+        table {
+            width: 1200px;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-left: 50px;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007b8f;
+            color: white;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7fdfd;
+        }
+
+        tr:hover {
+            background-color: #e1f4f5;
+            transition: 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        button {
+            background-color: #00a5b9;
+            border: none;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s ease;
+            width: 80px;
+        }
+
+        button:hover {
+            background-color: #0090a3;
+            box-shadow: 0 0 8px rgba(0, 165, 185, 0.4);
+        }
+
+        .add-btn {
+            background-color: #007b8f;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #009fb3;
+        }
+
+        td button + button {
+            margin-top: 8px;
+        }
+
+        th:last-child {
+            width: 120px;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 13px;
+            }
+            button {
+                padding: 6px 10px;
+            }
+        }
+    </style>
     <h1>ADD & MANAGE DOCTORS</h1>
-    <table style="width: 100%;">
+
+    <table>
         <tr>
             <th>SI NO</th>
             <th>NAME</th>
@@ -26,8 +120,9 @@
             <th>QUALIFICATION</th>
             <th>EXPERIENCE</th>
             <th>DEPARTMENT</th>
-            <th><a href="/add_doc">+</a></th>
+            <th><a href="/add_doc" class="add-btn">+</a></th>
         </tr>
+
         {% for i in doctors %}
         <tr>
             <td>{{ forloop.counter }}</td>
@@ -40,10 +135,11 @@
             <td>{{ i.Experience }}</td>
             <td>{{ i.Department }}</td>
             <td>
-            <button><a href="/update_doc/{{ i.id }}/">UPDATE</a></button><br></br><button><a href="/delete_doc/{{i.Loginid.id}}/">DELETE</button><br></br></td>
-
+                <button><a href="/update_doc/{{ i.id }}/">UPDATE</a></button><br>
+                <button><a href="/delete_doc/{{ i.Loginid.id }}/">DELETE</a></button>
+            </td>
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+
+    {% endblock %}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>patient record</title>
+
+  
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #e9f5f5; /* Soft hospital blue */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #007b8f;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #00a5b9;
+      padding-bottom: 5px;
+    }
+
+    table {
+      width: 100%;
+      max-width: 900px;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,123,143,0.1);
+      margin-bottom: 20px;
+      background-color: #ffffff;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007b8f;
+      color: white;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f7fdfd;
+    }
+
+    tr:hover {
+      background-color: #e1f4f5;
+      transition: 0.3s ease;
+    }
+
+    a.btn-send {
+      background-color: #00a5b9;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    a.btn-send:hover {
+      background-color: #0090a3;
+      box-shadow: 0 0 6px rgba(0,165,185,0.4);
+    }
+
+    @media (max-width: 768px) {
+      th, td {
+        font-size: 13px;
+        padding: 8px;
+      }
+
+      a.btn-send {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>PATIENT RECORDS</h1>
+
+  <div class="table-responsive" style="width: 100%; max-width: 900px;">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>SI NO</th>
+          <th>ID</th>
+          <th>File</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in patient %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ i.Userid.Name }}</td>
+          <td>{{ i.FileField}}</td>
+          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a href="/reports"></a>
+
+ 
+</body>
+</html>

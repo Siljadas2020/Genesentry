@@ -1,37 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <style>
-       *{
-        margin: 0;
-        padding: 0;
-       }
-       body{
-           display: flex;
-           justify-content: center;
-           height: 100vh;
-           align-items: center;
-           background-color:wheat;
-        }  
-    </style>
-</head>
-<body>
-    <form action="" method="POST">
-     {% csrf_token %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
 
+  <!-- ✅ Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #e9f5f5; /* Hospital blue */
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 123, 143, 0.15);
+      padding: 40px;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007b8f;
+      font-size: 26px;
+      margin-bottom: 25px;
+      border-bottom: 3px solid #00a5b9;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-control:focus {
+      border-color: #00a5b9;
+      box-shadow: 0 0 5px rgba(0, 165, 185, 0.4);
+    }
+
+    .btn-primary {
+      background-color: #007b8f;
+      border: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #009fb3;
+      box-shadow: 0 0 8px rgba(0, 165, 185, 0.4);
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      border: none;
+      font-weight: 600;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5c636a;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card mx-auto">
+      <form method="POST">
+        {% csrf_token %}
         <h1>Register</h1>
-    <label>Full name:<input type="text" name="Name"></label><br>
-    <label>Email:<input type="email" name="Email"></label><br>
-    <label>Phone number:<input type="text" name="Phoneno"></label><br>
-    <label>Qualification:<input type="text" name="Qualification"></label><br>
-    <label>Age:<input type="text" name="Age"></label><br>
-    <label>Gender:<input type="radio" name="Gender" value="Female">Female&nbsp;<input type="radio" name="Gender" value="Male">Male&nbsp;<input type="radio" name="Gender" value="Other">Other&nbsp;</label><br>
-    <label>Password:<input type="password" name="Password"></label><br>
-    <button type="submit">Register</button>&nbsp;
-    <button type="button">Login</button>
-</form>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Full Name</label>
+            <input type="text" name="Name" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" name="Email" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Phone Number</label>
+            <input type="text" name="Phoneno" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Qualification</label>
+            <input type="text" name="Qualification" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Age</label>
+            <input type="number" name="Age" class="form-control" required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Gender</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Gender" value="Female" required>
+              <label class="form-check-label">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Gender" value="Male">
+              <label class="form-check-label">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Gender" value="Other">
+              <label class="form-check-label">Other</label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Address</label>
+            <textarea name="Address" class="form-control" rows="3" required></textarea>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Password</label>
+            <input type="password" name="Password" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary w-100 py-2 mb-2">Register</button>
+          <button type="button" onclick="window.location='/'" class="btn btn-secondary w-100 py-2">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ✅ Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
