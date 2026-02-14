@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Doctors</title>
 
-  <!-- ✅ Bootstrap CSS -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     body {
-      background-color: #e9f5f5; /* Soft hospital blue */
+      background-color: #e9f5f5;
       font-family: 'Poppins', sans-serif;
       height: 100vh;
       display: flex;
@@ -38,123 +38,179 @@
 
     .form-label {
       font-weight: 600;
-      color: #333;
-    }
-
-    .form-control:focus {
-      border-color: #00a5b9;
-      box-shadow: 0 0 5px rgba(0, 165, 185, 0.4);
     }
 
     .btn-primary {
       background-color: #007b8f;
       border: none;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      transition: 0.3s;
     }
 
     .btn-primary:hover {
       background-color: #009fb3;
-      box-shadow: 0 0 8px rgba(0, 165, 185, 0.4);
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="card mx-auto">
-      <form method="post" onsubmit="return validateForm()">
-        {% csrf_token %}
-        <h1>ADD DOCTORS</h1>
+<div class="container">
+  <div class="card mx-auto">
 
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label class="form-label">Name</label>
-            <input type="text" name="Name" class="form-control" required>
-          </div>
+    <!-- novalidate is IMPORTANT -->
+    <form method="post" novalidate onsubmit="return validateForm()">
+      {% csrf_token %}
+      <h1>ADD DOCTORS</h1>
 
-          <div class="col-md-6">
-            <label class="form-label">Phone</label>
-            <input type="text" name="Phoneno" class="form-control" required>
-          </div>
+      <div class="row g-3">
 
-          <div class="col-md-6">
-            <label class="form-label">Email</label>
-            <input type="email" name="Email" class="form-control" required>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">Age</label>
-            <input type="number" name="Age" id="age" class="form-control" required min="18" max="90">
-            <div id="ageError" class="text-danger small mt-1"></div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">Gender</label>
-            <select name="Gender" class="form-control" required>
-              <option value="null">-- please select gender --</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Others">Others</option>
-            </select>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">Department</label>
-            <input type="text" name="Department" class="form-control" required>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">Experience</label>
-            <input type="text" name="Experience" class="form-control" required>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label">Qualification</label>
-            <input type="text" name="Qualification" class="form-control" required>
-          </div>
-
-          <div class="col-12">
-            <label class="form-label">Password</label>
-            <input type="password" name="Password" class="form-control" required>
-          </div>
+        <!-- Name -->
+        <div class="col-md-6">
+          <label class="form-label">Name</label>
+          <input type="text" id="name" name="Name" class="form-control">
+          <p id="nameError" class="text-danger small"></p>
         </div>
 
-        <div class="text-center mt-4">
-          <button type="submit" class="btn btn-primary w-100 py-2">ADD DOCTOR</button>
+        <!-- Phone -->
+        <div class="col-md-6">
+          <label class="form-label">Phone</label>
+          <input type="text" id="phone" name="Phoneno" class="form-control">
+          <p id="phoneError" class="text-danger small"></p>
         </div>
-      </form>
-    </div>
+
+        <!-- Email -->
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input type="email" id="email" name="Email" class="form-control">
+          <p id="emailError" class="text-danger small"></p>
+        </div>
+
+        <!-- Age -->
+        <div class="col-md-6">
+          <label class="form-label">Age</label>
+          <input type="number" id="age" name="Age" class="form-control">
+          <p id="ageError" class="text-danger small"></p>
+        </div>
+
+        <!-- Gender -->
+        <div class="col-md-6">
+          <label class="form-label">Gender</label>
+          <select id="gender" name="Gender" class="form-control">
+            <option value="">-- select gender --</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Others</option>
+          </select>
+          <p id="genderError" class="text-danger small"></p>
+        </div>
+
+        <!-- Department -->
+        <div class="col-md-6">
+          <label class="form-label">Department</label>
+          <input type="text" id="dept" name="Department" class="form-control">
+          <p id="deptError" class="text-danger small"></p>
+        </div>
+
+        <!-- Experience -->
+        <div class="col-md-6">
+          <label class="form-label">Experience</label>
+          <input type="number" id="exp" name="Experience" class="form-control">
+          <p id="expError" class="text-danger small"></p>
+        </div>
+
+        <!-- Qualification -->
+        <div class="col-md-6">
+          <label class="form-label">Qualification</label>
+          <input type="text" id="qual" name="Qualification" class="form-control">
+          <p id="qualError" class="text-danger small"></p>
+        </div>
+
+        <!-- Password -->
+        <div class="col-12">
+          <label class="form-label">Password</label>
+          <input type="password" id="password" name="Password" class="form-control">
+          <p id="passError" class="text-danger small"></p>
+        </div>
+
+      </div>
+
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary w-100">ADD DOCTOR</button>
+      </div>
+    </form>
   </div>
+</div>
 
-  <!-- ✅ JavaScript Validation -->
-  <script>
-    function validateForm() {
-      const ageInput = document.getElementById('age');
-      const ageError = document.getElementById('ageError');
-      const age = parseInt(ageInput.value, 10);
+<!-- JS VALIDATION -->
+<script>
+function validateForm() {
+  let valid = true;
 
-      if (isNaN(age) || age < 18 || age > 90) {
-        ageError.textContent = "Age must be between 18 and 90.";
-        ageInput.focus();
-        return false;
-      }
+  // regex
+  const nameRegex = /^[A-Za-z. ]{3,25}$/;
+  const phoneRegex = /^[6789][0-9]{9}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      ageError.textContent = "";
-      return true;
-    }
+  // inputs
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const age = document.getElementById("age").value;
+  const gender = document.getElementById("gender").value;
+  const dept = document.getElementById("dept").value.trim();
+  const exp = document.getElementById("exp").value;
+  const qual = document.getElementById("qual").value.trim();
+  const pass = document.getElementById("password").value;
 
-    // Prevent typing negative numbers
-    document.getElementById('age').addEventListener('input', function () {
-      if (this.value < 0) {
-        this.value = '';
-      }
-    });
-  </script>
+  // reset errors
+  document.querySelectorAll("p.text-danger").forEach(p => p.textContent = "");
 
-  <!-- ✅ Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  if (!nameRegex.test(name)) {
+    document.getElementById("nameError").textContent = "Enter valid name (3–25 letters only)";
+    valid = false;
+  }
+
+  if (!phoneRegex.test(phone)) {
+    document.getElementById("phoneError").textContent = "Enter valid 10-digit phone number";
+    valid = false;
+  }
+
+  if (!emailRegex.test(email)) {
+    document.getElementById("emailError").textContent = "Enter valid email address";
+    valid = false;
+  }
+
+  if (age < 21 || age > 70) {
+    document.getElementById("ageError").textContent = "Age must be between 21 and 70";
+    valid = false;
+  }
+
+  if (gender === "") {
+    document.getElementById("genderError").textContent = "Select gender";
+    valid = false;
+  }
+
+  if (dept === "") {
+    document.getElementById("deptError").textContent = "Department required";
+    valid = false;
+  }
+
+  if (exp <= 0 || exp > 50) {
+    document.getElementById("expError").textContent = "Enter valid experience";
+    valid = false;
+  }
+
+  if (qual === "") {
+    document.getElementById("qualError").textContent = "Qualification required";
+    valid = false;
+  }
+
+  if (pass.length < 6) {
+    document.getElementById("passError").textContent = "Password must be at least 6 characters";
+    valid = false;
+  }
+
+  return valid;
+}
+</script>
 
 </body>
 </html>

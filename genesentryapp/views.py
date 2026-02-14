@@ -278,6 +278,7 @@ class ViewAppointmentsView(View):
     def get(self, request):
         c=AppointmentTable.objects.all()
         return render(request, 'administration/view_appointments.html',{'appointments':c})
+          
 
 class ViewPatientsView(View):
     def get(self, request):
@@ -295,7 +296,7 @@ class ViewReviewView(View):
 class AppointmentsView(View):
     def get(self, request):
         return render(request, 'Doctor/appointments.html')
-
+        
 class MedicalPostsView(View):
     def get(self, request):
         return render(request, 'Doctor/medicalposts.html')
@@ -989,61 +990,61 @@ client = OpenAI(
 # =========================
 # API VIEW
 # =========================
-class PredictGeneticDisorder(APIView):
-    def post(self, request):
-        print("-------------------------------------------------", request.data)
-        try:
-            user = UserTable.objects.get(Loginid__id=request.data.get("userid"))
+# class PredictGeneticDisorder(APIView):
+#     def post(self, request):
+#         print("-------------------------------------------------", request.data)
+#         try:
+#             user = UserTable.objects.get(Loginid__id=request.data.get("userid"))
 
-            # ML prediction
-            result = predict_disease(request.data)
-            disorder = result.get("Predicted Disorder Subclass")
+#             # ML prediction
+#             result = predict_disease(request.data)
+#             disorder = result.get("Predicted Disorder Subclass")
 
-            # LLM description (OpenRouter)
-            description = generate_disorder_description(disorder, request.data)
+#             # LLM description (OpenRouter)
+#             description = generate_disorder_description(disorder, request.data)
 
-            # Save prediction
-            prediction = GeneticPrediction.objects.create(
-                USERID=user,
-                patient_age=request.data.get("patient_age"),
-                father_age=request.data.get("father_age"),
-                mother_age=request.data.get("Mother_age"),
-                gender=request.data.get("gender"),
-                genes_mother_side=request.data.get("genes_mother_side"),
-                inherited_father=request.data.get("inherited_father"),
-                maternal_gene=request.data.get("maternal_gene"),
-                paternal_gene=request.data.get("paternal_gene"),
-                blood_cell_count=request.data.get("blood_cell_count"),
-                white_blood_cell_count=request.data.get("white_blood_cell_count"),
-                respiratory_rate=request.data.get("respiratory_rate"),
-                heart_rate=request.data.get("heart_rate"),
-                parental_consent=request.data.get("parental_consent"),
-                follow_up=request.data.get("follow_up"),
-                birth_effects=request.data.get("birth_effects"),
-                folic_acid_intake=request.data.get("folic_acid_intake"),
-                blood_test_result=request.data.get("blood_test_result"),
-                genetic_disorder="Genetic Disorder",
-                disorder_subclass=disorder,
-                description=description
-            )
+#             # Save prediction
+#             prediction = GeneticPrediction.objects.create(
+#                 USERID=user,
+#                 patient_age=request.data.get("patient_age"),
+#                 father_age=request.data.get("father_age"),
+#                 mother_age=request.data.get("Mother_age"),
+#                 gender=request.data.get("gender"),
+#                 genes_mother_side=request.data.get("genes_mother_side"),
+#                 inherited_father=request.data.get("inherited_father"),
+#                 maternal_gene=request.data.get("maternal_gene"),
+#                 paternal_gene=request.data.get("paternal_gene"),
+#                 blood_cell_count=request.data.get("blood_cell_count"),
+#                 white_blood_cell_count=request.data.get("white_blood_cell_count"),
+#                 respiratory_rate=request.data.get("respiratory_rate"),
+#                 heart_rate=request.data.get("heart_rate"),
+#                 parental_consent=request.data.get("parental_consent"),
+#                 follow_up=request.data.get("follow_up"),
+#                 birth_effects=request.data.get("birth_effects"),
+#                 folic_acid_intake=request.data.get("folic_acid_intake"),
+#                 blood_test_result=request.data.get("blood_test_result"),
+#                 genetic_disorder="Genetic Disorder",
+#                 disorder_subclass=disorder,
+#                 description=description
+#             )
 
-            # Generate PDF
-            pdf_path = generate_pdf_report(prediction)
-            prediction.report_pdf = pdf_path
-            prediction.save()
+#             # Generate PDF
+#             pdf_path = generate_pdf_report(prediction)
+#             prediction.report_pdf = pdf_path
+#             prediction.save()
 
-            return Response({
-                "prediction": disorder,
-                "description": description,
-                "pdf": prediction.report_pdf.url
-            }, status=status.HTTP_200_OK)
+#             return Response({
+#                 "prediction": disorder,
+#                 "description": description,
+#                 "pdf": prediction.report_pdf.url
+#             }, status=status.HTTP_200_OK)
 
-        except Exception as e:
-            traceback.print_exc()
-            return Response(
-                {"error": str(e)},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+#         except Exception as e:
+#             traceback.print_exc()
+#             return Response(
+#                 {"error": str(e)},
+#                 status=status.HTTP_400_BAD_REQUEST
+#             )
 
 # =========================
 # PDF GENERATION
@@ -1087,9 +1088,9 @@ def generate_pdf_report(prediction_obj):
 
     return f"reports/{filename}"
 
-# =========================
-# OPENROUTER LLM
-# =========================
+# # =========================
+# # OPENROUTER LLM
+# # =========================
 def generate_disorder_description(disorder_name, patient_data):
     try:
         completion = client.chat.completions.create(
@@ -1122,15 +1123,15 @@ Include:
         )
 
         return completion.choices[0].message.content.strip()
-
+    
     except Exception as e:
         print("⚠️ OpenRouter failed. Falling back.")
         print("Reason:", str(e))
         return get_fallback_description(disorder_name)
 
-# =========================
-# FALLBACK (SAFE MODE)
-# =========================
+# # =========================
+# # FALLBACK (SAFE MODE)
+# # =========================
 def get_fallback_description(disorder_name):
     fallback_data = {
         "Leigh syndrome": (
@@ -1150,6 +1151,133 @@ def get_fallback_description(disorder_name):
         disorder_name,
         "This genetic disorder requires specialist medical evaluation and follow-up care."
     )
+
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+import traceback
+
+from .models import UserTable, GeneticPrediction
+from .main import predict_disease
+
+
+class PredictGeneticDisorder(APIView):
+
+    def normalize_inputs(self, data):
+        """
+        Normalize frontend values → model-friendly values
+        """
+
+        respiratory_map = {
+            "Normal (30–60)": "Normal",
+            "Normal (12–20)": "Normal",
+            "High": "High",
+            "Low": "Low"
+        }
+
+        heart_map = {
+            "Tachycardia": "High",
+            "Bradycardia": "Low",
+            "Normal": "Normal"
+        }
+
+        blood_test_map = {
+            "Not": "Normal",
+            "Abnormal": "Abnormal",
+            "Inconclusive": "Inconclusive"
+        }
+
+        if "respiratory_rate" in data:
+            data["respiratory_rate"] = respiratory_map.get(
+                data["respiratory_rate"], data["respiratory_rate"]
+            )
+
+        if "heart_rate" in data:
+            data["heart_rate"] = heart_map.get(
+                data["heart_rate"], data["heart_rate"]
+            )
+
+        if "blood_test_result" in data:
+            data["blood_test_result"] = blood_test_map.get(
+                data["blood_test_result"], data["blood_test_result"]
+            )
+
+        return data
+
+
+    def post(self, request):
+        print("Incoming data:", request.data)
+
+        try:
+            user_id = request.data.get("userid")
+            if not user_id:
+                return Response(
+                    {"error": "userid is required"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            user = UserTable.objects.get(Loginid__id=user_id)
+
+            # ✅ Normalize inputs
+            cleaned_data = self.normalize_inputs(request.data.copy())
+
+            # ✅ Predict
+            result = predict_disease(cleaned_data)
+            disorder = result.get("Predicted Disorder Subclass", "Unknown")
+
+            # ✅ Generate description
+            description = generate_disorder_description(disorder, cleaned_data)
+
+            # ✅ Save prediction
+            prediction = GeneticPrediction.objects.create(
+                USERID=user,
+                patient_age=cleaned_data.get("patient_age"),
+                father_age=cleaned_data.get("father_age"),
+                mother_age=cleaned_data.get("Mother_age"),
+                gender=cleaned_data.get("gender"),
+                genes_mother_side=cleaned_data.get("genes_mother_side"),
+                inherited_father=cleaned_data.get("inherited_father"),
+                maternal_gene=cleaned_data.get("maternal_gene"),
+                paternal_gene=cleaned_data.get("paternal_gene"),
+                blood_cell_count=cleaned_data.get("blood_cell_count"),
+                white_blood_cell_count=cleaned_data.get("white_blood_cell_count"),
+                respiratory_rate=cleaned_data.get("respiratory_rate"),
+                heart_rate=cleaned_data.get("heart_rate"),
+                blood_test_result=cleaned_data.get("blood_test_result"),
+                genetic_disorder="Genetic Disorder",
+                disorder_subclass=disorder,
+                description=description
+            )
+
+            # ✅ PDF
+            pdf_path = generate_pdf_report(prediction)
+            prediction.report_pdf = pdf_path
+            prediction.save()
+
+            return Response({
+                "prediction": disorder,
+                "description": description,
+                "pdf": prediction.report_pdf.url
+            }, status=status.HTTP_200_OK)
+
+        except UserTable.DoesNotExist:
+            return Response(
+                {"error": "User not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        except Exception as e:
+            traceback.print_exc()
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+# /////////////////////////////////////////////////////////////////
+# /////////////////////////////////////////////////////////////////
+# /////////////////////////////////////////////////////////////////
 
 
 class FeedBackAPi(APIView):
@@ -1175,7 +1303,7 @@ from .models import UserTable, HistoryTable
 # 🔑 OpenRouter client
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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",
+    api_key="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",
 )
 
 
@@ -1318,3 +1446,4 @@ class HistoryView(View):
 #     def get(self, request, id):
 #         c = FamilyHistory.objects.filter(USERID__id = id) 
 #         return render(request, 'Doctor/family_history.html',{'family_history':c})  
+

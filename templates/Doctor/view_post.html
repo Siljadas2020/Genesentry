@@ -5,24 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Medical Related Posts</title>
   <style>
-    body {
+   body {
       font-family: 'Poppins', sans-serif;
       background-color: #e9f5f5; /* Soft hospital blue */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       padding: 40px 20px;
+      justify-content: center;
     }
 
     h1 {
-      font-size: 28px;
+      text-align: center;
       color: #007b8f;
+      font-size: 28px;
       margin-bottom: 30px;
       border-bottom: 3px solid #00a5b9;
+      display: inline-block;
       padding-bottom: 5px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
     }
+    .page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 30px;
+}
+
+/* Force true visual centering */
+.page-header h1 {
+  margin: 0;
+  color: #007b8f;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Home button stays left but doesn't affect centering */
+.home-btn {
+  position: absolute;
+  top: 10%;
+  right: 50px;
+  background-color: #00a5b9;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateY(-5%);
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+}
+
+.home-btn:hover {
+  background-color: #007b8f;
+  transform: translateX(-1px);
+}
 
     table {
       width: 100%;
@@ -31,8 +68,8 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 20px rgba(0,123,143,0.1);
+      margin: 0 auto 20px;
       background-color: #ffffff;
-      margin-bottom: 30px;
     }
 
     th, td {
@@ -46,7 +83,6 @@
       color: white;
       text-transform: uppercase;
       font-size: 14px;
-      letter-spacing: 0.5px;
     }
 
     tr:nth-child(even) {
@@ -89,14 +125,14 @@
     }
 
     .btn-delete {
-      background-color: #e74c3c;
+      background-color: #007b8f;
+;
     }
 
     .btn-delete:hover {
-      background-color: #c0392b;
-      box-shadow: 0 0 6px rgba(231,76,60,0.4);
+     background-color: #005f6a;
+      box-shadow: 0 0 6px rgba(0,123,143,0.4);
     }
-
     .btn-add {
       background-color: #00a5b9;
       color: white;
@@ -130,7 +166,10 @@
   </style>
 </head>
 <body>
-  <h1>Medical Related Posts</h1>
+  <div class="page-header">
+  <a href="/doctor_home" class="home-btn">Home</a>
+  <h1>MEDICAL RELATED POSTS</h1>
+</div>
 
   <table>
     <thead>
@@ -161,6 +200,7 @@
         </td>
       </tr>
       {% endfor %}
+
     </tbody>
   </table>
 </body>

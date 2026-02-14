@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -110,11 +110,185 @@
     <form method="post" class="card">
         {% csrf_token %}
         <h1>LOGIN</h1>
-        <input type="text" name="Username" placeholder="Enter your username" required>
+        <input type="email" name="Username" placeholder="Enter your username" required>
         <input type="password" name="Password" placeholder="Enter your password" required>
         <button type="submit">LOGIN</button>
         <p>New User?</p>
         <button type="button" class="register-btn" onclick="window.location='/Register'">REGISTER</button>
     </form>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(./hospital-bg.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(6px);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 50px 60px;
+            box-shadow: 0 0 25px rgba(0, 123, 143, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007b8f;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0 4px 0;
+            border: 1px solid #00a5b9;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            outline: none;
+            transition: 0.3s ease;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #007b8f;
+            box-shadow: 0 0 8px rgba(0, 165, 185, 0.5);
+            background: #fff;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            text-align: left;
+            margin-bottom: 8px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #007b8f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #009fb3;
+            box-shadow: 0 0 10px rgba(0, 165, 185, 0.4);
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .register-btn {
+            background-color: transparent;
+            color: #007b8f;
+            border: 2px solid #007b8f;
+            font-weight: bold;
+        }
+
+        .register-btn:hover {
+            background-color: #007b8f;
+            color: white;
+        }
+
+        @media (max-width: 500px) {
+            .card {
+                width: 90%;
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<form method="post" class="card" onsubmit="return validateLogin()">
+    {% csrf_token %}
+    <h1>LOGIN</h1>
+
+    <input type="email" name="Username" id="username" placeholder="Enter your username">
+    <div class="error" id="emailError"></div>
+
+    <input type="password" name="Password" id="password" placeholder="Enter your password">
+    <div class="error" id="passwordError"></div>
+
+    <button type="submit">LOGIN</button>
+
+    <p>New User?</p>
+    <button type="button" class="register-btn" onclick="window.location='/Register'">REGISTER</button>
+</form>
+
+<script>
+    function validateLogin() {
+        let email = document.getElementById("username").value.trim();
+        let password = document.getElementById("password").value.trim();
+
+        let emailError = document.getElementById("emailError");
+        let passwordError = document.getElementById("passwordError");
+
+        emailError.innerHTML = "";
+        passwordError.innerHTML = "";
+
+        let isValid = true;
+
+        // Strict email validation
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (email === "") {
+            emailError.innerHTML = "Email is required";
+            isValid = false;
+        } else if (!emailPattern.test(email)) {
+            emailError.innerHTML = "Enter a valid email address";
+            isValid = false;
+        }
+
+        // Password validation (min 6 characters)
+        if (password === "") {
+            passwordError.innerHTML = "Password is required";
+            isValid = false;
+        } else if (password.length < 6) {
+            passwordError.innerHTML = "Password must be at least 6 characters";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
+
 </body>
 </html>

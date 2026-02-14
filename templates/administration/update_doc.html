@@ -63,7 +63,7 @@
 </head>
 
 <body>
-
+  
   <div class="container">
     <div class="card mx-auto">
       <form method="post">
@@ -79,13 +79,17 @@
 
           <div class="col-md-6">
             <label class="form-label">Phone</label>
-            <input type="text" name="Phoneno" class="form-control" value="{{ doctor.Phoneno }}" required>
+            <input type="text" name="Phoneno" class="form-control" value="{{ doctor.Phoneno }}" required pattern="[6-9][0-9]{9}"
+  maxlength="10"
+  inputmode="numeric"
+  title="Enter a valid 10-digit phone number starting with 6, 7, 8, or 9">
           </div>
 
           <div class="col-md-6">
             <label class="form-label">Email</label>
-            <input type="email" name="Email" class="form-control" value="{{ doctor.Email }}" required>
+            <input type="email" name="Email" class="form-control" value="{{ doctor.Email }}" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" title="Enter a valid email address(e.g., doctor@example.com)">
           </div>
+
 
           <div class="col-md-6">
             <label class="form-label">Age</label>
@@ -109,7 +113,8 @@
 
           <div class="col-md-6">
             <label class="form-label">Experience</label>
-            <input type="text" name="Experience" class="form-control" value="{{ doctor.Experience }}" required>
+            <input type="text" name="Experience" class="form-control" value="{{ doctor.Experience }}" required pattern="^(?:[0-9]|[1-4][0-9]|50)(\+)?(\s?(years?|yrs?))?$"
+            title="Enter experience as a number between 0 and 50 years.">
           </div>
 
           <div class="col-md-6">
@@ -127,11 +132,16 @@
   </div>
 
   <!-- Age Validation Script -->
+
+   
+  
   <script>
     function validateForm() {
       const ageInput = document.getElementById('age');
       const ageError = document.getElementById('ageError');
       const age = parseInt(ageInput.value, 10);
+     
+  
 
       if (isNaN(age) || age < 18 || age > 90) {
         ageError.textContent = "Age must be between 18 and 90.";

@@ -101,24 +101,38 @@
   </style>
 </head>
 <body>
-  <form action="/update_prescription/{{ prescription.id }}/" method="post">
-    {% csrf_token %}
-    <h1>Update Prescription</h1>
+ <form action="/update_prescription/{{ prescription.id }}/" method="post">
+  {% csrf_token %}
+  <h1>Update Prescription</h1>
 
-    <label>Username:</label>
-    <select name="Userid">
-      {% for i in users  %}
-      <option value="{{ i.Userid.id }}" {% if i.Userid.id == prescription.Userid.id %}selected{% endif %}>
-        {{ i.Userid.Name }}
-      </option>
-      {% endfor %}
-    </select>
+  <label>Username:</label>
+  <select name="Userid" required>
+    {% for i in users %}
+    <option value="{{ i.Userid.id }}" {% if i.Userid.id == prescription.Userid.id %}selected{% endif %}>
+      {{ i.Userid.Name }}
+    </option>
+    {% endfor %}
+  </select>
 
-    <label>Prescription:</label>
-    <textarea name="prescription">{{ prescription.prescription }}</textarea>
+  <label>Prescription:</label>
+  <textarea 
+    name="prescription" 
+    required 
+    minlength="5" 
+    maxlength="500"
+    pattern="^[A-Za-z0-9\s.,()-]+$"
+    title="Prescription must be 5–500 characters and should not contain special symbols."
+  >{{ prescription.prescription }}</textarea>
 
-    <label>Date:</label>
-    <input type="date" name="Date" value="{{ prescription.Date|date:'Y-m-d' }}">
+  <label>Date:</label>
+  <input 
+    type="date" 
+    name="Date" 
+    value="{{ prescription.Date|date:'Y-m-d' }}" 
+    required 
+    max="{{ today|date:'Y-m-d' }}"
+  >
+
 
     <button type="submit">Submit</button>
   </form>

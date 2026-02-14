@@ -58,7 +58,7 @@
 </head>
 <body>
   <header>
-    <h1>Doctor Dashboard</h1>
+    <h1>GeneSentry</h1>
     <p>Welcome, Dr. {{ doctor.Name }}</p>
   </header>
 
@@ -71,13 +71,14 @@
     <a href="/logout">Logout</a>
   </nav>
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="card">
       <h2>Today's Appointments</h2>
       <p>No appointments scheduled yet.</p>
-    </div>
+    </div> -->
 
-    <div class="card">
+    <div class="container">
+      <div class="card">
       <h2>Quick Actions</h2>
       <ul>
         <li><a href="{% url 'view_prescription' %}">Write Prescription</a></li>

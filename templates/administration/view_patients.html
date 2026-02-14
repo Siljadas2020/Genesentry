@@ -29,6 +29,45 @@
             display: inline-block;
             padding-bottom: 5px;
         }
+         .page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 30px;
+}
+
+/* Force true visual centering */
+.page-header h1 {
+  margin: 0;
+  color: #007b8f;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Home button stays left but doesn't affect centering */
+.home-btn {
+  position: absolute;
+  top: 10%;
+  right: 50px;
+  background-color: #00a5b9;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateY(-5%);
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+}
+
+.home-btn:hover {
+  background-color: #007b8f;
+  transform: translateX(-1px);
+}
 
         .table thead th {
             background-color: #007b8f;
@@ -50,7 +89,10 @@
 <body>
 
     <div class="container">
-        <h1>VIEW PATIENTS</h1>
+        <div class="page-header">
+  <a href="/admin_home" class="home-btn">Home</a>
+  <h1>VIEW PATIENTS</h1>
+</div>
 
         <div class="card p-4 mt-3">
             <div class="table-responsive">

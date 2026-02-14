@@ -1,33 +1,70 @@
-{% extends 'administration/admin_home.html' %}
+
 {% block body %}
       <style>
-        body {
+       body {
             font-family: 'Poppins', sans-serif;
-            background-color: #e9f5f5; /* Soft hospital blue background */
+            background-color: #e9f5f5; /* soft hospital blue background */
             color: #333;
             margin: 0;
+            padding: 40px;
         }
+        .page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 30px;
+}
 
+/* Force true visual centering */
+.page-header h1 {
+  margin: 0;
+  color: #007b8f;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Home button stays left but doesn't affect centering */
+.home-btn {
+  position: absolute;
+  top: 10%;
+  right: 50px;
+  background-color: #00a5b9;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateY(-5%);
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+}
+
+.home-btn:hover {
+  background-color: #007b8f;
+  transform: translateX(-1px);
+}
         h1 {
             text-align: center;
-            color: #007b8f; /* Teal hospital color */
+            color: #007b8f;
             font-size: 26px;
-            margin-bottom: 30px;
             letter-spacing: 1px;
+            margin-bottom: 30px;
             border-bottom: 3px solid #00a5b9;
             display: inline-block;
             padding-bottom: 8px;
-            margin-left: 20px;
         }
 
         table {
-            width: 1200px;
+            width: 100%;
             border-collapse: collapse;
             background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
             overflow: hidden;
-            margin-left: 50px;
         }
 
         th, td {
@@ -40,8 +77,8 @@
             background-color: #007b8f;
             color: white;
             text-transform: uppercase;
-            font-size: 14px;
             letter-spacing: 0.5px;
+            font-size: 14px;
         }
 
         tr:nth-child(even) {
@@ -68,7 +105,6 @@
             font-size: 13px;
             font-weight: 600;
             transition: 0.3s ease;
-            width: 80px;
         }
 
         button:hover {
@@ -107,7 +143,11 @@
             }
         }
     </style>
-    <h1>ADD & MANAGE DOCTORS</h1>
+    
+    <div class="page-header">
+  <a href="/admin_home" class="home-btn">Home</a>
+  <h1>ADD & MANAGE DOCTORS</h1>
+</div>
 
     <table>
         <tr>
